@@ -7,11 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+        colors: {
+            'primary': 'hsl(215, 35%, 50%)',
+            'accent': 'hsl(12.75, 80%, 40%)',
+            'lightGrey': 'hsl(218, 14%, 85%)',
+            'grey': 'hsl(231, 5%, 48%)',
+            'darkGrey': 'hsl(216, 4%, 26%)',
+            'gold': 'hsl(38, 49%, 43%)',
+            'error': 'hsl(0, 64%, 53%)',
+            'success': 'hsl(113, 81%, 41%)',
+            'bg-color': 'hsl(0, 0%, 100%)',
+            'bg-secondary-color': 'hsl(240, 14%, 96%)',
+        },
     },
   },
   plugins: [],

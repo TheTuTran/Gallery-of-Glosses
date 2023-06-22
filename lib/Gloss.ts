@@ -3,9 +3,7 @@
  * A gloss is a particular version or translation of a text.
  */
 export class Gloss {
-    /**
-     * The properties of the gloss, such as its title, identifier, alternative, city, etc.
-     */
+    // The properties of the gloss, such as its title, identifier, alternative, city, etc.
     title: string;
     description: string;
     targetChapter: string;
