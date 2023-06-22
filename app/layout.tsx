@@ -1,5 +1,8 @@
 import ToasterProvider from '@/providers/ToasterProvider'
 import './globals.css'
+import Navbar from '@/components/Navbar';
+import ModalProvider from '@/providers/ModalProvider';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Gallery of Glosses',
@@ -14,7 +17,11 @@ export default async function RootLayout({ children }: {children: React.ReactNod
         <html lang="en">
             <body>
                 <ToasterProvider />
-                {children}
+                    <ModalProvider />
+                    <Navbar>
+                        {children}
+                    </Navbar>
+                    <Footer />
             </body>
         </html>
     )

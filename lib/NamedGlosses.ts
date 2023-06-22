@@ -1,12 +1,8 @@
 import { Gloss } from "./Gloss";
 
-/**
- * The NamedGlosses class represents a collection of Gloss instances.
- */
+// The NamedGlosses class represents a collection of Gloss instances.
 export class NamedGlosses {
-    /**
-     * The array of glosses.
-     */
+    // The array of glosses.
     glosses: Gloss[];
 
     /**
