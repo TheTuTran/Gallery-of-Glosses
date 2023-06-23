@@ -17,19 +17,19 @@ const Sidebar: React.FC<SidebarProps> = ({ }) => {
 	const routes = useMemo(()=>[
 		{
 			icon: AiOutlineInfoCircle,
-			label: 'About',
+			label: 'About this Site',
 			active: pathname === "/about",
 			href: '/about',
 		},
 		{
 			icon: MdHistoryEdu,
-			label: 'History',
+			label: 'Project History',
 			active: pathname === "/about/history",
             href: '/about/history',
 		},
         {
 			icon: AiFillBook,
-			label: 'Terminology',
+			label: 'Terminology and Abbreviations',
 			active: pathname === "/about/terminology",
             href: '/about/terminology',
 		},
