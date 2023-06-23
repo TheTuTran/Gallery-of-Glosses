@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-import "@/../app/globals.css";
+import '@/../app/globals.css';
 
 interface NavbarItemProps {
 	label: string;

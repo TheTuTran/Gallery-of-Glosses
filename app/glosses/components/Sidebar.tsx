@@ -2,8 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import { MdHistoryEdu } from 'react-icons/md';
-import { AiOutlineInfoCircle, AiFillBook } from 'react-icons/ai';
+import { AiFillBook, AiFillTag } from 'react-icons/ai';
+import { BiBookAlt } from 'react-icons/bi';
+import { BsPalette } from 'react-icons/bs';
 
 import SidebarItem from '../../../components/SidebarItem';
 
@@ -24,22 +25,28 @@ const Sidebar = () => {
 
 	const routes = useMemo(()=>[
 		{
-			icon: AiOutlineInfoCircle,
-			label: 'About this Site',
-			active: pathname === "/about",
-			href: '/about',
+			icon: BiBookAlt,
+			label: 'Browse by Book',
+			active: pathname === "/glosses/book",
+			href: '/glosses/book',
 		},
 		{
-			icon: MdHistoryEdu,
-			label: 'Project History',
-			active: pathname === "/about/history",
-            href: '/about/history',
+			icon: BsPalette,
+			label: 'Browse by Theme',
+			active: pathname === "/glosses/theme",
+            href: '/glosses/theme',
 		},
         {
 			icon: AiFillBook,
-			label: 'Terminology and Abbreviations',
-			active: pathname === "/about/terminology",
-            href: '/about/terminology',
+			label: 'Browse by Manuscript',
+			active: pathname === "/glosses/manuscript",
+            href: '/glosses/manuscript',
+		},
+        {
+			icon: AiFillTag,
+			label: 'Browse by Tag',
+			active: pathname === "/glosses/tag",
+            href: '/glosses/tag',
 		},
 	], [pathname]);
 

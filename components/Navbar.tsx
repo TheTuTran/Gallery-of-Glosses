@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-
+import { twMerge } from 'tailwind-merge';
 import Box from './Box';
 import NavbarItem from './NavbarItem'
-import { twMerge } from 'tailwind-merge';
+
 
 interface NavbarProps {
 	children: React.ReactNode;

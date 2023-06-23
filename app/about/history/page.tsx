@@ -1,4 +1,4 @@
-import Sidebar from "@/app/about/components/Sidebar";
+import Sidebar from '@/app/about/components/Sidebar';
 
 export default function History() {
 
