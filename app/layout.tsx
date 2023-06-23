@@ -17,11 +17,11 @@ export default async function RootLayout({ children }: {children: React.ReactNod
         <html lang="en">
             <body>
                 <ToasterProvider />
-                    <ModalProvider />
-                    <Navbar>
-                        {children}
-                    </Navbar>
+                <ModalProvider />
+                <Navbar>
+                    {children}
                     <Footer />
+                </Navbar>
             </body>
         </html>
     )

@@ -17,36 +17,31 @@ interface NavbarProps {
  */
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
 	const pathname = usePathname();
-
+    
     // Define routes for the Navbar. Use the pathname to determine the active route.
-	const routes = useMemo(()=>[
+    const routes = useMemo(()=>[
 		{
 			label: 'Home',
 			active: pathname === '/',
 			href: '/',
 		},
 		{
-			label: 'About',
-			active: pathname === '/about',
+			label: 'About Gallery of Glosses',
+			active: pathname.includes('/about'),
 			href: '/about',
 		},
         {
-			label: 'History',
-			active: pathname === '/history',
-			href: '/history',
+			label: 'Browse Glosses',
+			active: pathname === '/glosses',
+			href: '/glosses',
 		},
         {
-			label: 'Terminology',
-			active: pathname === '/terminology',
-			href: '/terminology',
-		},
-        {
-			label: 'Compare',
+			label: 'Compare Glosses',
 			active: pathname === '/compare',
 			href: '/compare',
 		},
         {
-			label: 'Map',
+			label: 'Map of Glosses',
 			active: pathname === '/map',
 			href: '/map',
 		},
@@ -54,14 +49,16 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 
 	return (
 		<div className={twMerge("flex flex-col h-full w-full")}>
-			<div className="fixed hidden md:flex flex-col gap-y-2 bg-black h-[50px] w-full p-2">
+			<div className={`z-40 fixed hidden md:flex flex-col h-[60px] w-full p-2 transition duration-200 bg-black`}>
 				<Box>
 					<div className="flex text-center">
-						{routes.map((item) => (<NavbarItem key={item.label} {...item}/>))}
+						{routes.map((item) => (
+                            <NavbarItem key={item.label} {...item}/>
+                        ))}
 					</div>
 				</Box>
 			</div>
-			<main className="pt-20 h-full flex-1 overflow-y-auto py-5">
+			<main className="pt-[60px] flex-1 w-full m-0 bg-gradient-to-b from-black/95">
 				{children}
 			</main>
 		</div>

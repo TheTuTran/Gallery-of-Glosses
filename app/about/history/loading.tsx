@@ -1,16 +1,15 @@
 "use client";
 
 import Box from "@/components/Box";
+import { BounceLoader } from "react-spinners";
 
-const Error = () => {
+const Loading = () => {
 
     return (
         <Box className="h-full flex items-center justify-center">
-            <div className="text-black-400 text-2xl">
-                Something went wrong
-            </div>
+            <BounceLoader size={40} />
         </Box>
     )
 }
 
-export default Error;
+export default Loading;
