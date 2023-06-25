@@ -18,6 +18,9 @@ module.exports = {
                 'success': 'hsl(113, 81%, 41%)',
                 'bg-color': 'hsl(0, 0%, 100%)',
                 'bg-secondary-color': 'hsl(240, 14%, 96%)',
+                'bgColor': '#fbfafd',
+                'primaryHover': '#337ab7',
+
             },
             keyframes: {
                 "accordion-down": {

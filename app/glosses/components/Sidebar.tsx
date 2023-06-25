@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { AiFillBook, AiFillTag } from 'react-icons/ai';
 import { BiBookAlt } from 'react-icons/bi';
-import { BsPalette } from 'react-icons/bs';
+import { BsPalette, BsCardList } from 'react-icons/bs';
 
 import SidebarItem from '../../../components/SidebarItem';
 
@@ -24,6 +24,12 @@ const Sidebar = () => {
 	const pathname = usePathname();
 
 	const routes = useMemo(()=>[
+        {
+			icon: BsCardList,
+			label: 'Show All Glosses',
+			active: pathname === "/glosses",
+			href: '/glosses',
+		},
 		{
 			icon: BiBookAlt,
 			label: 'Browse by Book',
@@ -52,7 +58,7 @@ const Sidebar = () => {
 
 	return (
 		<div className="h-full">
-			<div className="hidden md:flex flex-col gap-y-2 bg-white h-full w-[300px] p-2 rounded-md border-gold border">
+			<div className="hidden md:flex flex-col gap-y-2 bg-bgColor h-full w-[300px] p-2 rounded-md border-gold border">
                 <div className="flex flex-col gap-y-4 px-8 py-4">
                     {routes.map((item) => (<SidebarItem key={item.label} {...item} />))}
                 </div>

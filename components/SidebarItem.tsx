@@ -11,7 +11,7 @@ interface SidebarItemProps {
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon: Icon, label, active, href }) => {
 	return (
-		<Link href={href} className={twMerge('flex flex-row h-auto items-center w-full gap-x-4 text-lg font-medium cursor-pointer hover:text-black transition text-gray-500 py-1', active && 'text-black')}>
+		<Link href={href} className={twMerge('flex flex-row h-auto items-center w-full gap-x-4 text-lg font-medium cursor-pointer hover:text-black transition text-gray-500 py-1', active && 'text-black font-semibold')}>
 			<Icon size={26} />
 			<p className="w-full">{label}</p>
 		</Link>

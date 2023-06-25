@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
 import { Gloss } from "@/lib/Gloss"
 
-export const Columns: ColumnDef<Gloss>[] = [
+export const GlossColumns: ColumnDef<Gloss>[] = [
     {
         accessorKey: "title",
         header: ({ column }) => (
