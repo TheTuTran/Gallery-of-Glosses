@@ -2,8 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import { MdHistoryEdu } from 'react-icons/md';
-import { AiOutlineInfoCircle, AiFillBook } from 'react-icons/ai';
+import { AiFillBook, AiFillTag } from 'react-icons/ai';
+import { BiBookAlt } from 'react-icons/bi';
+import { BsPalette, BsCardList } from 'react-icons/bs';
 
 import SidebarItem from '../../../components/SidebarItem';
 
@@ -23,29 +24,41 @@ const Sidebar = () => {
 	const pathname = usePathname();
 
 	const routes = useMemo(()=>[
-		{
-			icon: AiOutlineInfoCircle,
-			label: 'About this Site',
-			active: pathname === "/about",
-			href: '/about',
+        {
+			icon: BsCardList,
+			label: 'Show All Glosses',
+			active: pathname === "/glosses",
+			href: '/glosses',
 		},
 		{
-			icon: MdHistoryEdu,
-			label: 'Project History',
-			active: pathname === "/about/history",
-            href: '/about/history',
+			icon: BiBookAlt,
+			label: 'Browse by Book',
+			active: pathname === "/glosses/book",
+			href: '/glosses/book',
+		},
+		{
+			icon: BsPalette,
+			label: 'Browse by Theme',
+			active: pathname === "/glosses/theme",
+            href: '/glosses/theme',
 		},
         {
 			icon: AiFillBook,
-			label: 'Terminology and Abbreviations',
-			active: pathname === "/about/terminology",
-            href: '/about/terminology',
+			label: 'Browse by Manuscript',
+			active: pathname === "/glosses/manuscript",
+            href: '/glosses/manuscript',
+		},
+        {
+			icon: AiFillTag,
+			label: 'Browse by Tag',
+			active: pathname === "/glosses/tag",
+            href: '/glosses/tag',
 		},
 	], [pathname]);
 
 	return (
 		<div className="h-full">
-			<div className="hidden md:flex flex-col gap-y-2 bg-white h-full w-[300px] p-2 rounded-md border-gold border">
+			<div className="hidden md:flex flex-col gap-y-2 bg-bgColor h-full w-[300px] p-2 rounded-md border-gold border">
                 <div className="flex flex-col gap-y-4 px-8 py-4">
                     {routes.map((item) => (<SidebarItem key={item.label} {...item} />))}
                 </div>

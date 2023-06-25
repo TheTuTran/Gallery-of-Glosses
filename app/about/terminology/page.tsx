@@ -1,7 +1,7 @@
 "use client"
 
-import Sidebar from "@/app/about/components/Sidebar";
-import DropInfo from "@/components/DropInfo";
+import Sidebar from '@/app/about/components/Sidebar';
+import DropInfo from '@/components/DropInfo';
 
 export default function Terminology() {
 
