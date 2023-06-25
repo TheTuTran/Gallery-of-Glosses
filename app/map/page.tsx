@@ -1,6 +1,6 @@
-export default function Home() {
+export default function Map() {
   return (
-    <div>
+    <div className="min-h-screen">
         Home 
     </div>
   )

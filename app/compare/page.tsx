@@ -1,6 +1,6 @@
 export default function Compare() {
   return (
-    <div>
+    <div className="min-h-screen">
         Compare 
     </div>
   )

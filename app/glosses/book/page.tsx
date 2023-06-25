@@ -73,13 +73,14 @@ export default function Book() {
                     }
                 </div>
                 <div className="w-[25%] bg-gray-100 p-4 rounded-md">
+                    <p className="font-semibold text-xl">Browse by Book</p>
                     <p className="py-2">Medieval scholars and scribes glossed over authoritative texts that were important to their culture. Here you can browse glosses on those authoritative books</p>
                     <select className="mb-2 border-2 border-gray-200 rounded-sm w-full p-2 px-3" onChange={(e) => setBook(e.target.value)}>
                         <option value="">Select a Book</option>
                         <option value="Glossing-Matthew-Named-Glosses">Book of Matthew</option>
                         {/* Add more options as needed */}
                     </select>
-                    <button className="hover:bg-primaryHover shadow-sm bg-primary text-white px-4 rounded-md py-1 items-center gap-1" onClick={handleBrowseClick}>Browse this book</button>
+                    <button className="hover:bg-primaryHover shadow-sm bg-primary text-white px-4 rounded-md py-1 items-center gap-1" onClick={handleBrowseClick}>Browse by this book</button>
                 </div>
             </div> 
         </div>
