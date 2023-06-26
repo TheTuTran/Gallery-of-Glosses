@@ -7,8 +7,6 @@ import { Button } from "./ui/Button"
 import { Input } from "./ui/Input"
 import { DataTableViewOptions } from "./DataTableViewOptions"
 
-import { themes, labels } from "../data/data"
-
 interface DataTableToolbarProps<TData> {
     table: Table<TData>
 }

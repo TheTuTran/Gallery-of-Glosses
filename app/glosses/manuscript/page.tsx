@@ -2,74 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import { GlossColumns } from '../components/GlossColumns';
-import { DataTable } from '../components/DataTable';
+import { DataTable } from '@/components/DataTable';
 import { Gloss } from '@/lib/Gloss';
-import { Manuscript } from '@/lib/Manuscript';
 import { BeatLoader } from 'react-spinners';
 import Sidebar from '../components/Sidebar';
-import getObjectsByCollection from '@/actions/getObjectsByCollection';
-import getObjectsByValue from '@/actions/getObjectsByValue';
+import { useFetchedManuscripts } from '@/hooks/useFetchedManuscripts';
 
 
 export default function ManuscriptPage() {
     const [selectedManuscript, setSelectedManuscript] = useState(''); // Added state to manage book selection
-    const [manuscripts, setManuscripts] = useState<Manuscript[]>([]);
     const [glosses, setGlosses] = useState<Gloss[]>([]);
     const [isLoading, setIsLoading] = useState(false); 
-    const [isLoadingManuscripts, setIsLoadingManuscripts] = useState(true);
+    const { manuscripts, isLoading: isLoadingManuscripts } = useFetchedManuscripts('Glossing-Matthew-Named-Glosses');
 
     const fetchObjectsByManuscript = async (manuscript: string) => {
         //TODO: ONCE GLOSSES ARE CONNECTED TO MANUSCRIPTS
     }
-
-    const fetchManuscriptsByCollection = async () => {
-        try {
-            const objectsFromCollection = await getObjectsByCollection('Glossing-Matthew');
-            
-            if(objectsFromCollection.itemListElement){
-                const objectIds = objectsFromCollection.itemListElement.map((item) => item['@id']); // extract all ids
-
-                let newManuscripts: Manuscript[] = [];
-                for (let i = 0; i < objectIds.length; i++) {
-                    await getObjectsByValue(objectIds[i]).then(obj => {
-                        let manuscriptData = obj.map(item => {
-                            if (item.body && typeof item.body === 'object') { // Check that item.body exists and is an object
-                                const property = Object.keys(item.body)[0]; // gets the first property of the body object
-                                return {
-                                    [property]: item.body[property].value
-                                };
-                            } else {
-                                return {}; // Return an empty object if item.body is undefined or not an object
-                            }
-                        }).reduce((result, current) => {
-                            return { ...result, ...current };
-                        }, {});
-                        newManuscripts.push(new Manuscript(manuscriptData));
-
-                        // If we have processed 10 new glosses or this is the last object, update the state.
-                        if (newManuscripts.length % 10 === 0 || i === objectIds.length - 1) {
-                            // Merge newManuscripts into existing glosses state
-                            setManuscripts(prevManuscripts => {
-                                const uniqueManuscripts = newManuscripts.filter(newManuscript => 
-                                  !prevManuscripts.find(prevManuscript => prevManuscript.title === newManuscript.title)
-                                );
-                                return [...prevManuscripts, ...uniqueManuscripts];
-                            });
-                            newManuscripts = []; // Clear newManuscripts for the next batch
-                        }
-                    } 
-                    ).catch(console.error);
-                }
-            }
-            setIsLoadingManuscripts(false);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    useEffect(() => {
-        fetchManuscriptsByCollection();
-    }, []);
 
     const handleBrowseClick = () => {
         setIsLoading(true); // Set loading state to true when button is clicked
