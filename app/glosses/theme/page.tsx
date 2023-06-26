@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { GlossColumns } from '../components/GlossColumns';
-import { DataTable } from '../components/DataTable';
+import { DataTable } from '@/components/DataTable';
 import { Gloss } from '@/lib/Gloss';
 import { BeatLoader } from 'react-spinners';
 import Sidebar from '../components/Sidebar';
