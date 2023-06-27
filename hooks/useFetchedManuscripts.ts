@@ -1,68 +1,82 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Manuscript } from '@/lib/Manuscript';
-import getObjectsByValue from '@/actions/getObjectsByValue';
-import getObjectsByCollection from '@/actions/getObjectsByCollection';
+import { useState, useEffect } from "react";
+import { Manuscript } from "@/lib/Manuscript";
+import getObjectsByValue from "@/actions/getObjectsByValue";
+import getObjectsByCollection from "@/actions/getObjectsByCollection";
 
 export const useFetchedManuscripts = (collectionName: string) => {
-    const [manuscripts, setManuscripts] = useState<Manuscript[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [manuscripts, setManuscripts] = useState<Manuscript[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchObjectsByCollection = async () => {
-            try {
-                const objectsFromCollection = await getObjectsByCollection(collectionName);
-                
-                if (objectsFromCollection.itemListElement) {
-                    const objectIds = objectsFromCollection.itemListElement.map((item) => item['@id']); // extract all ids
-        
-                    // Define the chunk size
-                    const chunkSize = 50;
-                    for (let i = 0; i < objectIds.length; i += chunkSize) {
-                        const currentChunk = objectIds.slice(i, i + chunkSize);
-        
-                        // Create a promise for each id in the current chunk to fetch its data
-                        const fetchPromises = currentChunk.map((id) => getObjectsByValue(id));
-        
-                        // Wait for all promises to resolve
-                        const fetchedObjects = await Promise.all(fetchPromises);
-        
-                        const newManuscripts: Manuscript[] = [];
-        
-                        // Process each fetched object
-                        for (let j = 0; j < fetchedObjects.length; j++) {
-                            const obj = fetchedObjects[j];
-        
-                            let ManuscriptData = obj.map(item => {
-                                if (item.body && typeof item.body === 'object') { // Check that item.body exists and is an object
-                                    const property = Object.keys(item.body)[0]; // gets the first property of the body object
-                                    return {
-                                        [property]: item.body[property].value
-                                    };
-                                } else {
-                                    return {}; // Return an empty object if item.body is undefined or not an object
-                                }
-                            }).reduce((result, current) => {
-                                return { ...result, ...current };
-                            }, {});
-        
-                            newManuscripts.push(new Manuscript(ManuscriptData));
-                        }
-        
-                        // Add new Manuscripts to the state
-                        setManuscripts(prevManuscripts => [...prevManuscripts, ...newManuscripts]);
+  useEffect(() => {
+    const fetchObjectsByCollection = async () => {
+      if (manuscripts.length === 0) {
+        try {
+          const objectsFromCollection = await getObjectsByCollection(
+            collectionName
+          );
+
+          if (objectsFromCollection.itemListElement) {
+            const objectIds = objectsFromCollection.itemListElement.map(
+              (item) => item["@id"]
+            ); // extract all ids
+
+            // Define the chunk size
+            const chunkSize = 50;
+            for (let i = 0; i < objectIds.length; i += chunkSize) {
+              const currentChunk = objectIds.slice(i, i + chunkSize);
+
+              // Create a promise for each id in the current chunk to fetch its data
+              const fetchPromises = currentChunk.map((id) =>
+                getObjectsByValue(id)
+              );
+
+              // Wait for all promises to resolve
+              const fetchedObjects = await Promise.all(fetchPromises);
+
+              const newManuscripts: Manuscript[] = [];
+
+              // Process each fetched object
+              for (let j = 0; j < fetchedObjects.length; j++) {
+                const obj = fetchedObjects[j];
+
+                let ManuscriptData = obj
+                  .map((item) => {
+                    if (item.body && typeof item.body === "object") {
+                      // Check that item.body exists and is an object
+                      const property = Object.keys(item.body)[0]; // gets the first property of the body object
+                      return {
+                        [property]: item.body[property].value,
+                      };
+                    } else {
+                      return {}; // Return an empty object if item.body is undefined or not an object
                     }
-                }
-        
-                setIsLoading(false); // Data fetching completed
-            } catch (error) {
-                console.error(error);
+                  })
+                  .reduce((result, current) => {
+                    return { ...result, ...current };
+                  }, {});
+
+                newManuscripts.push(new Manuscript(ManuscriptData));
+              }
+
+              // Add new Manuscripts to the state
+              setManuscripts((prevManuscripts) => [
+                ...prevManuscripts,
+                ...newManuscripts,
+              ]);
             }
-        };
+          }
 
-        fetchObjectsByCollection();
-    }, [collectionName]);
+          setIsLoading(false); // Data fetching completed
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
 
-    return { manuscripts, isLoading };
+    fetchObjectsByCollection();
+  }, [collectionName]);
+
+  return { manuscripts, isLoading };
 };
