@@ -30,7 +30,7 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  setSelectedRows: any;
+  setSelectedRows?: any;
 }
 
 export function DataTable<TData, TValue>({
@@ -68,12 +68,14 @@ export function DataTable<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  const getFilteredSelectedRowModel = table.getFilteredSelectedRowModel();
+
   React.useEffect(() => {
     const selectedRowModel = table.getFilteredSelectedRowModel();
     if (setSelectedRows) {
       setSelectedRows(selectedRowModel);
     }
-  }, [table, setSelectedRows, table.getFilteredSelectedRowModel()]);
+  }, [table, setSelectedRows, getFilteredSelectedRowModel]);
 
   return (
     <div className="space-y-4">
