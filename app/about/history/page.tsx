@@ -1,5 +1,4 @@
 import Sidebar from "@/app/about/components/Sidebar";
-import Image from "next/image";
 
 export default function History() {
   return (
@@ -10,7 +9,7 @@ export default function History() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">May 15</h2>
-            <Image
+            <img
               src="/images/may_pict.png"
               alt="MayPicture"
               className="w-full h-64 object-cover rounded mb-4"
@@ -19,7 +18,7 @@ export default function History() {
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">June 15</h2>
-            <Image
+            <img
               src="/images/june_pict.png"
               alt="junePicture"
               className="w-full h-64 object-cover rounded mb-4"
@@ -28,7 +27,7 @@ export default function History() {
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">July 15</h2>
-            <Image
+            <img
               src="https://via.placeholder.com/350"
               alt="placeholder"
               className="w-full h-64 object-cover rounded mb-4"
@@ -37,7 +36,7 @@ export default function History() {
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">August 15</h2>
-            <Image
+            <img
               src="https://via.placeholder.com/350"
               alt="placeholder"
               className="w-full h-64 object-cover rounded mb-4"
