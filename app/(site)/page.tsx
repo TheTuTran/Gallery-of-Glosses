@@ -1,16 +1,19 @@
 "use client";
 
 import DropInfo from "@/components/DropInfo";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="pb-20">
       <div className="flex justify-center relative">
-        <img
+        <Image
           className="image w-screen opacity-70 border-gold border-y-2"
           src="/images/manuscript.png"
           alt="home"
+          height={30}
+          width={30}
         />
         <p className="absolute top-[40%] text-white solid text-8xl">
           {" "}

@@ -1,4 +1,5 @@
 import Sidebar from "@/app/about/components/Sidebar";
+import Image from "next/image";
 
 export default function History() {
   return (
@@ -9,39 +10,61 @@ export default function History() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">May 15</h2>
-            <img
+            <Image
               src="/images/may_pict.png"
               alt="MayPicture"
-              className="w-full h-64 object-cover rounded mb-4"
+              className="w-full object-cover rounded mb-4"
+              width={100}
+              height={64}
             />
-            <p className="text-gray-700">Beginning stages... </p>
+            <p className="text-gray-700">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              modi eos maiores reprehenderit non libero id cumque distinctio
+              deserunt ad?{" "}
+            </p>
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">June 15</h2>
-            <img
+            <Image
               src="/images/june_pict.png"
               alt="junePicture"
-              className="w-full h-64 object-cover rounded mb-4"
+              className="w-full object-cover rounded mb-4"
+              width={200}
+              height={64}
             />
-            <p className="text-gray-700">... </p>
+            <p className="text-gray-700">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              modi.
+            </p>
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">July 15</h2>
-            <img
-              src="https://via.placeholder.com/350"
+            <Image
+              src=""
               alt="placeholder"
-              className="w-full h-64 object-cover rounded mb-4"
+              className="w-full object-cover rounded mb-4"
+              width={200}
+              height={64}
             />
-            <p className="text-gray-700">...</p>
+            <p className="text-gray-700">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
+              laboriosam nostrum esse neque voluptates quidem.
+            </p>
           </div>
           <div className="border rounded-lg p-4 hover:shadow-lg transition duration-200">
             <h2 className="text-2xl font-bold mb-2">August 15</h2>
-            <img
-              src="https://via.placeholder.com/350"
+            <Image
+              src=""
               alt="placeholder"
               className="w-full h-64 object-cover rounded mb-4"
+              width={30}
+              height={30}
             />
-            <p className="text-gray-700">...</p>
+            <p className="text-gray-700">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+              blanditiis ab corporis sequi delectus aliquam atque iusto?
+              Facilis.
+            </p>
           </div>
         </div>
       </div>
