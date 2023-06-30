@@ -37,7 +37,7 @@ const Modal: React.FC<ModalProps> = ({
                             h-[25px] w-[25px]appearance-none items-center 
                             justify-center rounded-full focus:outline-none"
             >
-              <IoMdClose />
+              <IoMdClose size={30} />
             </button>
           </Dialog.Close>
         </Dialog.Content>

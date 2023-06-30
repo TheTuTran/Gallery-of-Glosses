@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "./Modal";
+import Modal from "../../../components/Modal";
 import useCompareModal from "@/hooks/useCompareModal";
 import { unparse } from "papaparse";
 

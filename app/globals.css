@@ -53,3 +53,8 @@ table.basic thead tr th {
 table.basic tr td {
   @apply px-4 py-1 border border-black;
 }
+
+.mapContainer {
+  z-index: 0;
+  position: relative;
+}

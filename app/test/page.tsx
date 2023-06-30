@@ -1,16 +1,17 @@
 "use client";
 
 import dynamic from "next/dynamic";
+const DynamicMap = dynamic(
+  () => import("@/app/test/components/ReactMap"),
+  { ssr: false } // This will prevent the component from rendering on the server.
+);
 
-const DynamicMap = dynamic(() => import("@/components/ReactMap"), {
-  ssr: false,
-});
 export default function Map() {
   return (
     <div className="min-h-full">
       <div className="flex gap-4 p-8">
         <div className="min-h-screen w-[70%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
-          <p className="font-bold text-lg">React Map</p>
+          <p className="font-bold text-lg">Test React Maps</p>
           <DynamicMap />
         </div>
         <div className="w-[30%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
