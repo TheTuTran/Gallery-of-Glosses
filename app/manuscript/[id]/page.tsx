@@ -1,5 +1,6 @@
 "use client";
 
+import Box from "@/components/Box";
 import { Manuscript } from "@/lib/Manuscript";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,7 +29,7 @@ export default function Map() {
     "This is where the canonical text related to the Manuscript will be.";
   return (
     <div className="flex gap-4 p-8">
-      <div className="min-h-screen w-[70%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
+      <Box className="min-h-screen w-[70%] rounded-md p-8 overflow-auto">
         <div>
           <h1 className="text-4xl mb-4">Manuscript Details</h1>
           <div className="border-[1.5px] border-black bg-grey/10 mb-4 rounded-md p-2">
@@ -134,7 +135,7 @@ export default function Map() {
             </div>
           </div>
         </div>
-      </div>
+      </Box>
 
       <div className="w-[30%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
         <h2 className="text-2xl mb-2 text-blue-700">Manuscript Images:</h2>

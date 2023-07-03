@@ -1,8 +1,9 @@
-import { twMerge } from 'tailwind-merge';
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface BoxProps {
-	children: React.ReactNode;
-	className?: string;
+  children: React.ReactNode;
+  className?: string;
 }
 /**
  * The Box component serves as a container for child components.
@@ -14,13 +15,14 @@ interface BoxProps {
  * @returns A div container with applied styles and child elements.
  */
 
-const Box: React.FC<BoxProps> = ({ children, className }) => {
-	
-	return (
-		<div className={twMerge('rounded-lg h-fit w-full', className)}>
-			{children}
-		</div>
-	)
-}
+const Box = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ children, className }) => {
+    return (
+      <div className={twMerge("border bg-bgColor border-gold", className)}>
+        {children}
+      </div>
+    );
+  }
+);
 
 export default Box;

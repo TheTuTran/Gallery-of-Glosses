@@ -1,126 +1,180 @@
 "use client";
 
-import DropInfo from "@/components/DropInfo";
+import Box from "@/components/Box";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useEffect } from "react";
+import {
+  Parallax,
+  ParallaxLayer,
+  Parallax as ParallaxType,
+} from "@react-spring/parallax";
 
 export default function Home() {
+  const parallaxRef = useRef<any>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (parallaxRef.current) {
+        // The `current` page of the Parallax component starts at `0`.
+        const currentPage = Math.floor(parallaxRef.current.scroll);
+
+        if (window.scrollY > window.innerHeight * currentPage) {
+          // User scrolled down, go to next page.
+          parallaxRef.current.scrollTo(currentPage + 1);
+        } else if (window.scrollY < window.innerHeight * currentPage) {
+          // User scrolled up, go to previous page.
+          parallaxRef.current.scrollTo(currentPage - 1);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="pb-20">
-      <div className="flex justify-center relative">
-        <Image
-          className="image w-screen opacity-70 border-gold border-y-2"
-          src="/images/manuscript.png"
-          alt="home"
-          height={30}
-          width={30}
-        />
-        <p className="absolute top-[40%] text-white solid text-8xl">
-          {" "}
-          Gallery of Glosses
-        </p>
-      </div>
-      <div className="flex gap-2 p-4 h-full justify-center">
-        <div className="flex gap-4 w-[80%]">
-          <div className="flex-col gap-y-2 bg-bg-color border border-gold w-[40%] h-fit p-4 rounded-md">
-            Slideshow Placeholder
-          </div>
-          <div className="border border-gold bg-bg-color p-4 rounded-md">
-            <div>
-              <div className="p-2 flex flex-col gap-3">
-                <p className="text-3xl font-semibold">
-                  {" "}
-                  Welcome to the Gallery of Glosses
-                </p>
-                <p className="text-2xl text-gray-500">
-                  The Gallery of Glosses is a comprehensive digital resource
-                  dedicated to the study, interpretation, and appreciation of
-                  glosses &mdash; explanatory annotations on the margins or
-                  between the lines of ancient manuscripts.
-                </p>
-                <p className="text-2xl text-gray-500">
-                  The platform is designed to cater to scholars, historians,
-                  theologians, philosophers, and law enthusiasts with a passion
-                  for medieval studies.
-                </p>
-              </div>
-              <div className="p-2 flex justify-center">
-                <Link
-                  href="/glosses"
-                  className="bg-bg-secondary-color rounded-md p-2 hover:bg-bg-color transition font-semibold border border-gold"
-                >
-                  Start Browsing Glosses
-                </Link>
-              </div>
-              <div className="flex flex-col gap-1 p-2">
-                <DropInfo title="What is a Gloss?">
-                  <div className="">
-                    A gloss is a note or explanation inserted in the margins or
-                    between lines of a text to explain, translate, or expand on
-                    difficult or complex passages. They serve as a valuable
-                    insight into the scholarly and interpretative practices of
-                    the past, providing context and interpretations for text
-                    that can aid in our understanding of medieval theology,
-                    philosophy, and law.
+    <div className="min-h-screen pb-20 relative">
+      <Parallax pages={4} ref={parallaxRef}>
+        <ParallaxLayer speed={2.75}>
+          <div>
+            <div className="flex justify-center relative">
+              <Image
+                className="image opacity-70 w-full border-gold border-y-2"
+                src="/images/manuscript.png"
+                alt="home"
+                height={100}
+                width={1000}
+              />
+              <p className="absolute top-[40%] text-white solid text-8xl">
+                Gallery of Glosses
+              </p>
+            </div>
+            <div className="flex gap-2 p-4 justify-center ">
+              <div className="py-32 flex gap-4 w-[80%] ">
+                <Box className="slide-in-left flex w-[40%] p-4 rounded-md items-center justify-center">
+                  <p className="h-full">Slideshow Placeholder</p>
+                </Box>
+                <Box className="slide-in-right p-4 rounded-md">
+                  <div className="pb-32">
+                    <div className="p-2 flex flex-col gap-3">
+                      <p className="text-3xl font-semibold">
+                        Welcome to the Gallery of Glosses
+                      </p>
+                      <p className=" text-gray-500">
+                        The Gallery of Glosses is a comprehensive digital
+                        resource dedicated to the study, interpretation, and
+                        appreciation of glosses &mdash; explanatory annotations
+                        on the margins or between the lines of ancient
+                        manuscripts.
+                      </p>
+                      <p className=" text-gray-500">
+                        The platform is designed to cater to scholars,
+                        historians, theologians, philosophers, and law
+                        enthusiasts with a passion for medieval studies.
+                      </p>
+                    </div>
                   </div>
-                </DropInfo>
-                <DropInfo title="Why Study Glosses?">
-                  <div>
-                    Glosses provide a unique perspective on the ways medieval
-                    scholars understood and interpreted canonical texts. By
-                    studying these annotations, we gain insights into the
-                    intellectual landscape of the medieval period, and how
-                    scholars grappled with the complexities of the texts they
-                    studied.
-                  </div>
-                </DropInfo>
-                <DropInfo title="Gallery of Glosses Tools:">
-                  <ul className="list-disc ml-5">
-                    <p className="py-2 font-semibold text-lg">
-                      Our website offers the opportunity to visualize the
-                      journey of glosses across time.
-                    </p>
-                    <li>
-                      The interactive map illustrates the geographical spread
-                      and evolution of manuscripts over centuries. Explore the
-                      colorful pins, each representing a manuscript and
-                      color-coded according to different decades or
-                      quarter-centuries, to trace the paths of these influential
-                      texts.
-                    </li>
-                    <p className="py-2 font-semibold text-lg">
-                      Delve into the &quot;Explore Glosses&quot; section for a
-                      variety of browsing options.
-                    </p>
-                    <li>
-                      &quot;Browse by Book&quot;, you&apos;ll find glosses
-                      associated with authoritative books from the medieval era,
-                      shedding light on how these texts were perceived and
-                      interpreted.
-                    </li>
-                    <li>
-                      &quot;Browse by Theme&quot; brings together collections of
-                      glosses centered around specific research topics, offering
-                      insights into the diverse themes that preoccupied scholars
-                      and scribes of the time.
-                    </li>
-                    <li>
-                      &quot;Browse by Manuscript&quot; allows you to examine all
-                      glosses derived from a particular manuscript, offering a
-                      deeper understanding of each unique textual artifact.
-                    </li>
-                    <li>
-                      &quot;Browse by Tag&quot; section brings together glosses
-                      linked by shared tags, offering another perspective on
-                      these fascinating historical texts.
-                    </li>
-                  </ul>
-                </DropInfo>
+                </Box>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={2.75}>
+          <div className="py-32 flex justify-center gap-20 bg-bg-color min-h-[100vh]">
+            <div className="w-[30%] flex flex-col">
+              <p className="font-bold text-3xl mb-10 text-gold">
+                Browse Glosses
+              </p>
+              <ul className="list-style-type:none; text-gray-700 text-lg flex flex-col gap-4">
+                <li>
+                  Browse our collection of glosses by book, theme, manuscript,
+                  and tags
+                </li>
+                <li>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda, asperiores! Eum ipsam minima dolores rem!
+                </li>
+                <li>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Temporibus, eligendi.
+                </li>
+                <div className="mt-10 p-2 flex justify-center">
+                  <Link
+                    href="/glosses"
+                    className="bg-bg-secondary-color rounded-md p-2 hover:bg-bg-color transition font-semibold border border-gold"
+                  >
+                    Start Browsing Glosses
+                  </Link>
+                </div>
+              </ul>
+            </div>
+            <Box className="w-[40%] slide-in-right rounded-md items-center justify-center flex min-h-[432px]">
+              Video of using Browse Glosses
+            </Box>
+          </div>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={2} speed={2.75}>
+          <div className="py-32 flex justify-center gap-20 min-h-screen">
+            <Box className="w-[40%] rounded-md items-center justify-center flex min-h-[432px]">
+              Video of using Compare Glosses
+            </Box>
+            <div className="w-[30%] flex flex-col ">
+              <p className="font-bold text-3xl mb-10 text-gold">
+                Compare Glosses
+              </p>
+              <ul className="list-style-type:none; text-gray-200 text-lg flex flex-col gap-4">
+                <li>
+                  Compare Different Glosses and categorize different glosses and
+                  download them as a csv.
+                </li>
+                <li>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda, asperiores! Eum ipsam minima dolores rem!
+                </li>
+              </ul>
+              <div className="mt-10 p-2 flex justify-center">
+                <Link
+                  href="/compare"
+                  className="bg-bg-secondary-color rounded-md p-2 hover:bg-bg-color transition font-semibold border border-gold"
+                >
+                  Compare Different Glosses
+                </Link>
+              </div>
+            </div>
+          </div>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={3} speed={2.75}>
+          <div className="py-32 flex justify-center gap-20 bg-bg-color min-h-screen">
+            <div className="w-[30%] flex flex-col ">
+              <p className="font-bold text-3xl mb-10">Map of Glosses</p>
+              <ul className="list-style-type:none; text-gray-700 text-lg flex flex-col gap-4">
+                <li>Look at the origin of Glossed Matthew Manuscripts</li>
+                <li>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda, asperiores! Eum ipsam minima dolores rem!
+                </li>
+                <div className="mt-10 p-2 flex justify-center">
+                  <Link
+                    href="/map"
+                    className="bg-bg-secondary-color rounded-md p-2 hover:bg-bg-color transition font-semibold border border-gold"
+                  >
+                    Interact with the Map
+                  </Link>
+                </div>
+              </ul>
+            </div>
+            <Box className="w-[40%] rounded-md items-center justify-center flex min-h-[432px]">
+              Video of using Explore Maps
+            </Box>
+          </div>
+        </ParallaxLayer>
+      </Parallax>
     </div>
   );
 }

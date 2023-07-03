@@ -7,6 +7,7 @@ import { BiBookAlt } from "react-icons/bi";
 import { BsPalette, BsCardList } from "react-icons/bs";
 
 import SidebarItem from "../../../components/SidebarItem";
+import Box from "@/components/Box";
 
 /**
  * Sidebar functional component.
@@ -61,13 +62,13 @@ const Sidebar = () => {
 
   return (
     <div className="h-full">
-      <div className="hidden md:flex flex-col gap-y-2 bg-bgColor h-full w-[300px] p-2 rounded-md border-gold border">
+      <Box className="hidden md:flex flex-col gap-y-2 h-full w-[300px] p-2 rounded-md">
         <div className="flex flex-col gap-y-4 px-8 py-4">
           {routes.map((item) => (
             <SidebarItem key={item.label} {...item} />
           ))}
         </div>
-      </div>
+      </Box>
     </div>
   );
 };

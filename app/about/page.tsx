@@ -1,4 +1,5 @@
 import Sidebar from "./components/Sidebar";
+import Box from "@/components/Box";
 
 export default function About() {
   const headerStyling = "font-semibold text-xl py-3";
@@ -6,7 +7,7 @@ export default function About() {
   return (
     <div className="flex gap-4 p-8">
       <Sidebar />
-      <div className="h-screen w-screen bg-white rounded-md p-8 border-gold border overflow-auto">
+      <Box className="min-h-screen w-screen rounded-md p-8 overflow-auto">
         <div>
           <h1 className="text-4xl font-semibold mb-6">
             About Gallery of Glosses
@@ -49,9 +50,65 @@ export default function About() {
               that resonates through the centuries and influences future
               interpretations.
             </p>
+            <h2 className={headerStyling}>What is a Gloss?</h2>
+            <p className={contentStyling}>
+              A gloss is a note or explanation inserted in the margins or
+              between lines of a text to explain, translate, or expand on
+              difficult or complex passages. They serve as a valuable insight
+              into the scholarly and interpretative practices of the past,
+              providing context and interpretations for text that can aid in our
+              understanding of medieval theology, philosophy, and law.
+            </p>
+            <h2 className={headerStyling}>Why Study Glosses?</h2>
+            <p className={contentStyling}>
+              Glosses provide a unique perspective on the ways medieval scholars
+              understood and interpreted canonical texts. By studying these
+              annotations, we gain insights into the intellectual landscape of
+              the medieval period, and how scholars grappled with the
+              complexities of the texts they studied.
+            </p>
+            <h2 className={headerStyling}>Gallery of Glosses Tools:</h2>
+            <ul className="list-disc ml-5">
+              <p className="py-2 font-semibold text-lg">
+                Our website offers the opportunity to visualize the journey of
+                glosses across time.
+              </p>
+              <li>
+                The interactive map illustrates the geographical spread and
+                evolution of manuscripts over centuries. Explore the colorful
+                pins, each representing a manuscript and color-coded according
+                to different decades or quarter-centuries, to trace the paths of
+                these influential texts.
+              </li>
+              <p className="py-2 font-semibold text-lg">
+                Delve into the &quot;Explore Glosses&quot; section for a variety
+                of browsing options.
+              </p>
+              <li>
+                &quot;Browse by Book&quot;, you&apos;ll find glosses associated
+                with authoritative books from the medieval era, shedding light
+                on how these texts were perceived and interpreted.
+              </li>
+              <li>
+                &quot;Browse by Theme&quot; brings together collections of
+                glosses centered around specific research topics, offering
+                insights into the diverse themes that preoccupied scholars and
+                scribes of the time.
+              </li>
+              <li>
+                &quot;Browse by Manuscript&quot; allows you to examine all
+                glosses derived from a particular manuscript, offering a deeper
+                understanding of each unique textual artifact.
+              </li>
+              <li>
+                &quot;Browse by Tag&quot; section brings together glosses linked
+                by shared tags, offering another perspective on these
+                fascinating historical texts.
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
+      </Box>
     </div>
   );
 }

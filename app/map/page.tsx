@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import getTargetIdByValue from "@/actions/getTargetByValue";
+import Box from "@/components/Box";
 const DynamicMap = dynamic(() => import("@/app/map/components/ManuscriptMap"), {
   ssr: false,
 });
@@ -66,7 +67,7 @@ export default function Map() {
             />
           )}
         </div>
-        <div className="w-[30%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
+        <Box className="w-[30%] rounded-md p-8 overflow-auto">
           <div className="flex flex-col">
             <div className="flex">
               <label className={styling}>Low Year: {yearLow}</label>
@@ -120,10 +121,10 @@ export default function Map() {
               )}
             </div>
           </div>
-        </div>
+        </Box>
       </div>
       <div className="flex gap-4 px-8">
-        <div className="min-h-screen w-[70%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
+        <Box className="min-h-screen w-[70%] rounded-md p-8 overflow-auto">
           <p className="font-bold text-lg">Provenance (location by c.1200)</p>
           {/** 
           {isLoadingManuscripts ? (
@@ -137,7 +138,7 @@ export default function Map() {
             />
           )}
           */}
-        </div>
+        </Box>
         <div className="w-[30%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
           <div className="flex flex-col">
             <div className="flex">

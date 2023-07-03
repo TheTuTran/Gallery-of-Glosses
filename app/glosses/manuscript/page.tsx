@@ -7,6 +7,7 @@ import { Gloss } from "@/lib/Gloss";
 import { BeatLoader } from "react-spinners";
 import Sidebar from "../components/Sidebar";
 import { useFetchedManuscripts } from "@/hooks/useFetchedManuscripts";
+import Box from "@/components/Box";
 
 export default function ManuscriptPage() {
   const [selectedManuscript, setSelectedManuscript] = useState(""); // Added state to manage book selection
@@ -27,7 +28,7 @@ export default function ManuscriptPage() {
   return (
     <div className="flex gap-4 p-8">
       <Sidebar />
-      <div className="h-fit min-h-screen bg-white rounded-md p-8 border-gold border overflow-auto flex gap-4">
+      <Box className="h-fit min-h-screen rounded-md p-8 overflow-auto flex gap-4">
         <div className="w-[75%] bg-gray-100 p-4 rounded-md">
           <DataTable columns={GlossColumns} data={glosses} />
           {isLoading && (
@@ -69,7 +70,7 @@ export default function ManuscriptPage() {
             </div>
           )}
         </div>
-      </div>
+      </Box>
     </div>
   );
 }

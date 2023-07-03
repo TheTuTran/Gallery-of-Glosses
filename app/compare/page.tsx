@@ -7,6 +7,7 @@ import { MdOutlineOpenInNew } from "react-icons/md";
 import { useFetchedGlosses } from "@/hooks/useFetchedGlosses";
 import { useState } from "react";
 import useCompareModal from "@/hooks/useCompareModal";
+import Box from "@/components/Box";
 
 /**
  * Glosses content.
@@ -29,7 +30,7 @@ export default function Compare() {
 
   return (
     <div className="flex gap-4 p-8">
-      <div className="min-h-screen w-[70%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
+      <Box className="min-h-screen w-[70%] rounded-md p-8 overflow-auto">
         <DataTable
           setSelectedRows={setSelectedRows}
           columns={GlossColumns}
@@ -41,7 +42,7 @@ export default function Compare() {
             <BeatLoader size={5} className="translate-y-1" />
           </div>
         )}
-      </div>
+      </Box>
       <div className="w-[30%] bg-bgColor rounded-md p-8 border-gold border overflow-auto">
         <div className="flex flex-col">
           <div>

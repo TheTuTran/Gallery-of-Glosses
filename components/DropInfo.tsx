@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import { BsChevronDown } from 'react-icons/bs';
+import { useState } from "react";
+import { BsChevronDown } from "react-icons/bs";
 
 interface DropInfoProps {
-	children: React.ReactNode;
-	title: string;
+  children: React.ReactNode;
+  title: string;
 }
 
 /**
@@ -19,22 +19,27 @@ interface DropInfoProps {
  * @returns A dropdown component with a title and toggleable visibility.
  */
 const DropInfo: React.FC<DropInfoProps> = ({ children, title }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
-	
-	return (
-		<div className="bg-bg-secondary-color border-gold border rounded-lg">
-            <div onClick={() => setShowDropdown(!showDropdown)} className="hover:bg-bg-color transition cursor-pointer flex items-center gap-4 p-2 font-bold text-3xl">
-                <BsChevronDown className= {` transition ${showDropdown ? '' : '-rotate-90'}`}/>
-                <p> {title} </p>
-            </div>
-            {showDropdown && (
-                    <div className="p-2 px-4 h-fit">
-                        <hr className="border-2"/>
-                        {children}
-                    </div>
-                )}
-		</div>
-	)
-}
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  return (
+    <div className="bg-bg-secondary-color border-gold border rounded-lg">
+      <div
+        onClick={() => setShowDropdown(!showDropdown)}
+        className="hover:bg-bg-color transition cursor-pointer flex items-center gap-4 p-2 font-bold text-3xl"
+      >
+        <BsChevronDown
+          className={` transition ${showDropdown ? "" : "-rotate-90"}`}
+        />
+        <p> {title} </p>
+      </div>
+      {showDropdown && (
+        <div className="p-2 px-4 h-fit">
+          <hr className="border-2" />
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default DropInfo;
