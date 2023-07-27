@@ -15,14 +15,8 @@ interface BoxProps {
  * @returns A div container with applied styles and child elements.
  */
 
-const Box = React.forwardRef<HTMLDivElement, BoxProps>(
-  ({ children, className }) => {
-    return (
-      <div className={twMerge("border bg-bgColor border-gold", className)}>
-        {children}
-      </div>
-    );
-  }
-);
+const Box: React.FC<BoxProps> = ({ children, className }) => {
+  return <div className={twMerge("box", className)}>{children}</div>;
+};
 
 export default Box;

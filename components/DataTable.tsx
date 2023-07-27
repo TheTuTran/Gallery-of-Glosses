@@ -26,6 +26,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/Table";
+import { toast } from "react-hot-toast";
+import { getTargetIdByValue } from "@/services";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -44,8 +47,11 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [hasRowSelectionChanged, setHasRowSelectionChanged] =
+    React.useState(false);
 
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const router = useRouter();
   const table = useReactTable({
     data,
     columns,
@@ -77,12 +83,36 @@ export function DataTable<TData, TValue>({
     }
   }, [table, setSelectedRows, getFilteredSelectedRowModel]);
 
+  const handleGlossClicked = (row: any) => {
+    if (hasRowSelectionChanged) {
+      setHasRowSelectionChanged(false);
+    } else {
+      toast.success("Opening Gloss in another tab... Please wait");
+
+      getTargetIdByValue("title", row.original.title)
+        .then((targetId) => {
+          // Store manuscript data in session storage
+          sessionStorage.setItem("glossData", JSON.stringify(row.original));
+
+          // navigate to the new page with the target id as a parameter
+          router.push(`/gloss/${targetId}`);
+        })
+        .catch((error) => {
+          console.error("Error getting target id:", error);
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    setHasRowSelectionChanged(true);
+  }, [rowSelection]);
+
   return (
     <div className="space-y-4">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border border-gray-300">
+      <div className="rounded-md border border-neutral-500 bg-neutral-200 overflow-auto h-[57vh]">
         <Table>
-          <TableHeader>
+          <TableHeader className="rounded-md ">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -104,11 +134,13 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="cursor-pointer hover:bg-neutral-300/80"
+                  onClick={() => handleGlossClicked(row)}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className="text-center" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -121,7 +153,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center border"
+                  className="h-24 text-center"
                 >
                   No results.
                 </TableCell>

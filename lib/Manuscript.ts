@@ -13,7 +13,7 @@ export class Manuscript {
   date: number;
   institution: string;
   provenance: string;
-  baseProject: string;
+  "tpen://base-project": string;
   url: string;
   notes: string;
 
@@ -37,7 +37,7 @@ export class Manuscript {
     this.date = data.date || 0;
     this.institution = data.institution || "";
     this.provenance = data.provenance || "";
-    this.baseProject = data.baseProject || "";
+    this["tpen://base-project"] = data["tpen://base-project"] || "";
     this.url = data.url || "";
     this.notes = data.notes || "";
   }

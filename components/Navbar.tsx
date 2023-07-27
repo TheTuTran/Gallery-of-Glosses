@@ -68,9 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
           </div>
         </div>
       </div>
-      <main className="pt-[60px] flex-1 w-full m-0 bg-gradient-to-b from-black/95">
-        {children}
-      </main>
+      <main className="pt-[5vh] flex-1 bg-neutral-800">{children}</main>
     </div>
   );
 };

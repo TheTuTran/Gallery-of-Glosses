@@ -1,42 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GlossColumns } from "../components/GlossColumns";
 import { DataTable } from "@/components/DataTable";
 import { Gloss } from "@/lib/Gloss";
-import { BeatLoader } from "react-spinners";
 import Sidebar from "../components/Sidebar";
 import Box from "@/components/Box";
+import LoadingBox from "@/components/LoadingBox";
 
 export default function Theme() {
-  const [book, setBook] = useState(""); // Added state to manage book selection
+  const [theme, setTheme] = useState(""); // Added state to manage book selection
   const [glosses, setGlosses] = useState<Gloss[]>([]);
   const [isLoading, setIsLoading] = useState(false); // Initially set to false
 
-  const fetchObjectsByTheme = async (book: string) => {
+  // Fetch objects by theme
+  const fetchObjectsByTheme = async (theme: string) => {
     // TODO: ONCE THEME IS IMPLEMENTED
   };
 
   const handleBrowseClick = () => {
     setIsLoading(true); // Set loading state to true when button is clicked
-    fetchObjectsByTheme(book); // Fetch glosses for the selected theme
+    fetchObjectsByTheme(theme); // Fetch glosses for the selected theme
   };
+
+  // disables scrolling
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   return (
     <div className="flex gap-4 p-8">
-      <Sidebar />
-      <Box className="h-fit min-h-screen rounded-md p-8 overflow-auto flex gap-4">
+      <Box className="h-[77vh] rounded-md p-8 overflow-auto flex gap-4">
         <div className="w-[75%] bg-gray-100 p-4 rounded-md">
           <DataTable columns={GlossColumns} data={glosses} />
-          {isLoading && (
-            <div className="flex pt-10 items-center gap-2">
-              <p>Loading glosses</p>
-              <BeatLoader size={5} className="translate-y-1" />
-            </div>
-          )}
         </div>
         <div className="w-[25%] bg-gray-100 p-4 rounded-md">
-          <p className="font-semibold text-xl">Browse by Theme</p>
+          <Sidebar />
           <p className="py-2">
             The same theme or topic could be addressed in various glosses on
             different authoritative texts. Here you can browse collections of
@@ -44,9 +46,9 @@ export default function Theme() {
           </p>
           <select
             className="mb-2 border-2 border-gray-200 rounded-sm w-full p-2 px-3"
-            onChange={(e) => setBook(e.target.value)}
+            onChange={(e) => setTheme(e.target.value)}
           >
-            <option value="">Select a Theme</option>
+            <option value="">Show All Glosses</option>
             {/* Add more options as needed */}
           </select>
           <button
@@ -55,6 +57,8 @@ export default function Theme() {
           >
             Browse by this Theme
           </button>
+
+          {isLoading && <LoadingBox label="Glosses" />}
         </div>
       </Box>
     </div>
