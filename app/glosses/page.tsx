@@ -2,10 +2,10 @@
 
 import { GlossColumns } from "./components/GlossColumns";
 import { DataTable } from "@/components/DataTable";
-import { BeatLoader } from "react-spinners";
 import Sidebar from "./components/Sidebar";
 import { useFetchedGlosses } from "@/hooks/useFetchedGlosses";
 import Box from "@/components/Box";
+import LoadingBox from "@/components/LoadingBox";
 
 /**
  * Glosses content.
@@ -21,15 +21,15 @@ export default function Glosses() {
 
   return (
     <div className="flex gap-4 p-8">
-      <Sidebar />
-      <Box className="h-screen w-screen rounded-md p-8 overflow-auto">
-        <DataTable columns={GlossColumns} data={glosses} />
-        {isLoading && (
-          <div className="flex pt-10 items-center gap-2">
-            <p>Loading glosses</p>
-            <BeatLoader size={5} className="translate-y-1" />
-          </div>
-        )}
+      <Box className="h-[77vh] rounded-md p-8 overflow-auto flex gap-4 w-full">
+        <div className="w-[75%] bg-gray-100 p-4 rounded-md">
+          <DataTable columns={GlossColumns} data={glosses} />
+        </div>
+        <div className="w-[25%] bg-gray-100 p-4 rounded-md">
+          <Sidebar />
+
+          {isLoading && <LoadingBox label="Glosses" />}
+        </div>
       </Box>
     </div>
   );

@@ -1,45 +1,46 @@
 "use client";
 
-import getTargetIdByValue from "@/actions/getTargetByValue";
+import { getTargetIdByValue } from "@/services";
 import Modal from "@/components/Modal";
 import useManuscriptMap from "@/hooks/useManuscriptMapModal";
 import { Manuscript } from "@/lib/Manuscript";
 import { useRouter } from "next/navigation";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import ManuscriptModalDetails from "./ManuscriptModalDetails";
+import toast from "react-hot-toast";
 
-const ManuscriptMap = () => {
-  const ManuscriptMap = useManuscriptMap();
-  const router = useRouter();
+const ManuscriptMapModal = () => {
+  const ManuscriptMap = useManuscriptMap(); // Getting the map data using the useManuscriptMap hook.
+  const router = useRouter(); // Initialize the Next.js router.
+
   const onChange = (open: boolean) => {
     if (!open) {
-      ManuscriptMap.onClose();
+      ManuscriptMap.onClose(); // When the modal is closed, call the onClose function from the ManuscriptMap.
     }
   };
 
   const title =
-    ManuscriptMap?.selectedManuscripts[0]?.origin.split("?")[0] || "";
+    ManuscriptMap?.selectedManuscripts[0]?.origin.split("?")[0] || ""; // Get the origin of the first selected manuscript.
 
   const filteredManuscripts = ManuscriptMap.selectedManuscripts.filter(
     (manuscript: Manuscript) =>
       manuscript.date >= ManuscriptMap.minYear &&
       manuscript.date <= ManuscriptMap.maxYear
-  );
+  ); // Filter the selected manuscripts based on the date.
 
-  const handleMoreInfoClick = async (manuscript: any) => {
+  const handleMoreInfoClick = async (manuscript: Manuscript) => {
+    toast.success("Loading Manuscript... Please wait"); // Show a toast notification.
     try {
       const targetId = await getTargetIdByValue(
         "identifier",
         manuscript.identifier
-      );
+      ); // Get the target ID based on the manuscript's identifier.
 
-      // Store manuscript data in session storage
-      sessionStorage.setItem("manuscriptData", JSON.stringify(manuscript));
+      sessionStorage.setItem("manuscriptData", JSON.stringify(manuscript)); // Save the manuscript data to the session storage.
 
-      // navigate to the new page with the target id as a parameter
-      router.push(`/manuscript/${targetId}`);
-      ManuscriptMap.onClose();
+      router.push(`/manuscript/${targetId}`); // Navigate to the manuscript page.
+      ManuscriptMap.onClose(); // Close the map.
     } catch (error) {
-      console.error("Error getting target id:", error);
+      console.error("Error getting target id:", error); // Log the error.
     }
   };
 
@@ -57,31 +58,11 @@ const ManuscriptMap = () => {
         </h1>
         <div className="flex flex-col gap-2 overflow-y-auto max-h-[600px] border">
           {filteredManuscripts.map((manuscript: Manuscript) => (
-            <div
-              className="border p-4 rounded shadow-lg bg-white"
+            <ManuscriptModalDetails
               key={manuscript.identifier}
-            >
-              <h3 className="text-xl font-bold">{manuscript.title}</h3>
-              <p>Identifier: {manuscript.identifier}</p>
-              <p>Alternative: {manuscript.alternative}</p>
-              <p>City: {manuscript.city}</p>
-              <p>Origin: {manuscript.origin}</p>
-              <p>Region: {manuscript.region}</p>
-              <p>Date: {manuscript.date}</p>
-              <p>Institution: {manuscript.institution}</p>
-              <p>Provenance: {manuscript.provenance}</p>
-              <p>Notes: {manuscript.notes}</p>
-              <p>URL: {manuscript.url}</p>
-              <button
-                onClick={() => {
-                  handleMoreInfoClick(manuscript);
-                }}
-                className="bg-neutral-200 ml-auto border rounded-md py-1 px-2 w-auto text-sm font-semibold flex flex-rows items-center hover:bg-neutral-300 transition"
-              >
-                <AiOutlineInfoCircle className="mr-1" />
-                More Info
-              </button>
-            </div>
+              manuscript={manuscript}
+              onMoreInfoClick={handleMoreInfoClick}
+            />
           ))}
         </div>
       </div>
@@ -89,4 +70,4 @@ const ManuscriptMap = () => {
   );
 };
 
-export default ManuscriptMap;
+export default ManuscriptMapModal;

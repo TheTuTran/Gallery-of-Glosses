@@ -22,22 +22,19 @@ const DropInfo: React.FC<DropInfoProps> = ({ children, title }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className="bg-bg-secondary-color border-gold border rounded-lg">
+    <div className="dropinfo">
       <div
         onClick={() => setShowDropdown(!showDropdown)}
-        className="hover:bg-bg-color transition cursor-pointer flex items-center gap-4 p-2 font-bold text-3xl"
+        className="cursor-pointer flex items-center justify-between px-6 py-4 transition-colors hover:bg-gray-50"
       >
+        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
         <BsChevronDown
-          className={` transition ${showDropdown ? "" : "-rotate-90"}`}
+          className={`w-6 h-6 transition-transform transform ${
+            showDropdown ? "rotate-180" : "rotate-0"
+          } text-gray-500`}
         />
-        <p> {title} </p>
       </div>
-      {showDropdown && (
-        <div className="p-2 px-4 h-fit">
-          <hr className="border-2" />
-          {children}
-        </div>
-      )}
+      {showDropdown && <div className="px-6 py-4 space-y-4">{children}</div>}
     </div>
   );
 };

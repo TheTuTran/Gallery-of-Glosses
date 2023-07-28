@@ -1,23 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GlossColumns } from "../components/GlossColumns";
 import { DataTable } from "@/components/DataTable";
 import { Gloss } from "@/lib/Gloss";
-import { BeatLoader } from "react-spinners";
 import Sidebar from "../components/Sidebar";
-import getObjectsByValue from "@/actions/getObjectsByValue";
-import getObjectsByCollection from "@/actions/getObjectsByCollection";
+import { getObjectsByCollection, getObjectsByTargetId } from "@/services";
 import Box from "@/components/Box";
+import LoadingBox from "@/components/LoadingBox";
 
 export default function TagPage() {
+  // Use state to handle selected tag and its corresponding glosses
   const [selectedTag, setSelectedTag] = useState("");
   const [glosses, setGlosses] = useState<Gloss[]>([]);
   const [displayGlosses, setDisplayGlosses] = useState<Gloss[]>(glosses);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchObjectsByCollection = async () => {
+  // Function to fetch data from the "Glossing-Matthew-Named-Glosses" collection
+  const fetchObjectsByCollection = useCallback(async () => {
     try {
       const objectsFromCollection = await getObjectsByCollection(
         "Glossing-Matthew-Named-Glosses"
@@ -30,19 +31,29 @@ export default function TagPage() {
         let newGlosses: Gloss[] = [];
         let newTags: string[] = [];
         for (let i = 0; i < objectIds.length; i++) {
-          await getObjectsByValue(objectIds[i])
+          await getObjectsByTargetId(objectIds[i])
             .then((obj) => {
               let glossData = obj
                 .map((item) => {
-                  if (
-                    item.body &&
-                    typeof item.body === "object" &&
-                    item.body[0] !== ""
-                  ) {
-                    const property = Object.keys(item.body)[0];
-                    return {
-                      [property]: item.body[property].value,
-                    };
+                  if (item.body && typeof item.body === "object") {
+                    const properties = Object.keys(item.body);
+
+                    let glossData: any = {};
+
+                    for (let property of properties) {
+                      if (property === "tags") {
+                        // Handle tags object
+                        glossData["tags"] = {
+                          "@type": item.body[property]["@type"],
+                          items: item.body[property]["items"],
+                        };
+                      } else {
+                        // Handle other keys
+                        glossData[property] = item.body[property].value;
+                      }
+                    }
+
+                    return glossData;
                   }
                 })
                 .reduce((result, current) => {
@@ -61,11 +72,16 @@ export default function TagPage() {
                 });
               }
 
-              console.log(newGlosses);
               if (newGlosses.length % 10 === 0 || i === objectIds.length - 1) {
                 setGlosses((prevGlosses) => [...prevGlosses, ...newGlosses]);
-                setAllTags((prevTags) => [...prevTags, ...newTags]);
+                // Calculate unique tags
+                const uniqueTags = Array.from(
+                  new Set([...allTags, ...newTags])
+                );
 
+                setAllTags((prevTags) =>
+                  Array.from(new Set([...prevTags, ...uniqueTags]))
+                );
                 newGlosses = [];
                 newTags = [];
               }
@@ -77,11 +93,12 @@ export default function TagPage() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [allTags]);
 
+  // Fetch the data when component mounts
   useEffect(() => {
     fetchObjectsByCollection();
-  }, []);
+  }, [fetchObjectsByCollection]);
 
   const handleBrowseClick = () => {
     const filteredGlosses = glosses.filter((gloss) =>
@@ -90,19 +107,27 @@ export default function TagPage() {
     setDisplayGlosses(filteredGlosses);
   };
 
+  // Update the displayed glosses when glosses changes
   useEffect(() => {
     setDisplayGlosses(glosses);
   }, [glosses]);
 
+  // Prevent scrolling
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
     <div className="flex gap-4 p-8">
-      <Sidebar />
-      <Box className="h-fit min-h-screen rounded-md p-8 overflow-auto flex gap-4">
+      <Box className="h-[77vh] rounded-md p-8 overflow-auto flex gap-4">
         <div className="w-[75%] bg-gray-100 p-4 rounded-md">
           <DataTable columns={GlossColumns} data={displayGlosses} />
         </div>
         <div className="w-[25%] bg-gray-100 p-4 rounded-md">
-          <p className="font-semibold text-xl">Browse by Tags</p>
+          <Sidebar />
           <p className="py-2">
             Various glosses share certain features or terms. We have selectively
             ascribed tags to capture this information. Here you may browse
@@ -114,7 +139,7 @@ export default function TagPage() {
             className="mb-2 border-2 border-gray-200 rounded-sm w-full p-2 px-3"
             onChange={(e) => setSelectedTag(e.target.value)}
           >
-            <option value="">Select a Tag</option>
+            <option value="">Show All Glosses</option>
             {allTags.map((tag, index) => (
               <option key={index} value={tag}>
                 {tag}
@@ -127,12 +152,8 @@ export default function TagPage() {
           >
             Browse by this tag
           </button>
-          {isLoading && (
-            <div className="flex pt-2 items-center gap-2">
-              <p>Loading glosses and tags</p>
-              <BeatLoader size={5} className="translate-y-1" />
-            </div>
-          )}
+
+          {isLoading && <LoadingBox label="Glosses" />}
         </div>
       </Box>
     </div>

@@ -1,29 +1,22 @@
 "use client";
-
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AiFillBook, AiFillTag } from "react-icons/ai";
 import { BiBookAlt } from "react-icons/bi";
 import { BsPalette, BsCardList } from "react-icons/bs";
 
-import SidebarItem from "../../../components/SidebarItem";
+import SidebarItem from "@/components/SidebarItem";
 import Box from "@/components/Box";
 
-/**
- * Sidebar functional component.
- * This component is used to display a sidebar navigation.
- * It uses the `usePathname` hook to get the current URL path.
- * Then, it uses the `useMemo` hook to create a list of route objects, which each contain:
- *  - An icon
- *  - A label
- *  - An `active` state indicating if the current URL path matches the route
- *  - An `href` for navigation
- *
- * @returns A JSX element representing the Sidebar component.
- */
+// Sidebar component contains a set of navigation items
 const Sidebar = () => {
+  // Use the usePathname hook to get the current route
   const pathname = usePathname();
 
+  // Initialize state for expanded menu
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Define the routes for the sidebar
   const routes = useMemo(
     () => [
       {
@@ -60,17 +53,32 @@ const Sidebar = () => {
     [pathname]
   );
 
+  // Identify the active navigation item
+  const activeItem = useMemo(
+    () => routes.find((item) => item.active),
+    [routes]
+  );
+
+  // Return the Sidebar component
   return (
-    <div className="h-full">
-      <Box className="hidden md:flex flex-col gap-y-2 h-full w-[300px] p-2 rounded-md">
-        <div className="flex flex-col gap-y-4 px-8 py-4">
-          {routes.map((item) => (
-            <SidebarItem key={item.label} {...item} />
-          ))}
+    <div className="mt-10">
+      <Box className="hidden md:flex flex-col gap-y-2 rounded-md w-full">
+        <div className="flex flex-col">
+          {/* If the menu is expanded, show all items. Otherwise, only show the active item. */}
+          {isExpanded
+            ? routes.map((item) => <SidebarItem key={item.label} {...item} />)
+            : activeItem && (
+                <SidebarItem
+                  key={activeItem.label}
+                  {...activeItem}
+                  onClick={() => setIsExpanded(!isExpanded)}
+                />
+              )}
         </div>
       </Box>
     </div>
   );
 };
 
+// Export the Sidebar component
 export default Sidebar;

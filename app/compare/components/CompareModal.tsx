@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "../../../components/Modal";
+import Modal from "@/components/Modal";
 import useCompareModal from "@/hooks/useCompareModal";
 import { unparse } from "papaparse";
 
@@ -55,7 +55,7 @@ const CompareModal = () => {
       onChange={onChange}
     >
       <div className="flex flex-col">
-        <div className="overflow-y-auto max-h-[400px]">
+        <div className="overflow-y-auto max-h-[600px]">
           <table className="basic m-2 max-w-[1650px]">
             <thead>
               <tr>

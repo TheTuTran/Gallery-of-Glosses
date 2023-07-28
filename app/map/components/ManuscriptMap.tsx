@@ -1,20 +1,20 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { LatLngTuple, icon } from "leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
+import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "@/app/globals.css";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { Manuscript } from "@/lib/Manuscript";
+import { originCoordinates } from "@/data/constants";
+import { ChangeView } from "./ChangeView";
+import { ManuscriptMarker } from "./ManuscriptMarker";
 
 interface ManuscriptMapProps {
   yearLow: number;
   yearHigh: number;
-  manuscripts: any;
-  handleMarkerClick: (manuscripts: any[]) => void;
-}
-
-interface ChangeViewProps {
-  center: LatLngTuple;
+  manuscripts: Manuscript[];
+  handleMarkerClick: (manuscripts: Manuscript[]) => void;
 }
 
 const ManuscriptMap: React.FC<ManuscriptMapProps> = ({
@@ -23,103 +23,69 @@ const ManuscriptMap: React.FC<ManuscriptMapProps> = ({
   manuscripts,
   handleMarkerClick,
 }) => {
-  const originCoordinates: Record<string, number[]> = {
-    "Saint-Amand": [50.4472, 3.4312],
-    Laon: [49.5641, 3.6199],
-    "Buildwas Abbey": [52.6311, -2.4943],
-    Chartres: [48.4468, 1.4983],
-    Paris: [48.8566, 2.3522],
-    Hereford: [52.0567, -2.7156],
-    Clairvaux: [48.1785, 4.7441],
-    York: [53.9583, -1.0803],
-    "Bury St Edmunds": [52.2429, 0.7143],
-    "Saint Gall": [47.4223, 9.3748],
-  };
-
-  // initialize the map center to Laon
+  // State for the center of the map.
   const [mapCenter, setMapCenter] = useState<LatLngTuple>(
     originCoordinates["Laon"] as LatLngTuple
   );
 
-  const ICON = icon({
-    iconUrl: "/images/marker.png",
-    iconSize: [32, 32],
-  });
+  // Prepare the origin string for processing.
+  const prepareOrigin = useCallback((origin: string) => {
+    let preparedOrigin = origin;
+    const separators = ["/", "(", "?"];
+    separators.forEach((sep) => {
+      if (preparedOrigin.includes(sep)) {
+        preparedOrigin = preparedOrigin.split(sep)[0].trim();
+      }
+    });
+    return preparedOrigin;
+  }, []);
 
-  const ChangeView: React.FC<ChangeViewProps> = ({ center }) => {
-    const map = useMap();
-    map.flyTo(center);
-    return null;
-  };
+  // Filter and map manuscripts to include coordinates.
+  const manuscriptsWithCoordinates = useMemo(() => {
+    return manuscripts
+      .filter((manuscript) => manuscript.origin !== "")
+      .sort((a, b) => a.date - b.date)
+      .map((manuscript) => {
+        let origin = prepareOrigin(manuscript.origin);
+        const coordinates = originCoordinates[origin] || [0, 0];
+        return { ...manuscript, coordinates };
+      });
+  }, [manuscripts, prepareOrigin]);
 
-  // take out manuscripts without an origin
-  const filteredManuscripts = manuscripts.filter(
-    (manuscript: { origin: string }) => manuscript.origin !== ""
+  // Handle marker click on the map.
+  const getManuscriptWithOrigin = useCallback(
+    (origin: string, coordinates: number[]) => {
+      const preparedOrigin = prepareOrigin(origin);
+      handleMarkerClick(
+        manuscriptsWithCoordinates.filter((manuscript) =>
+          manuscript.origin.includes(preparedOrigin)
+        )
+      );
+      setMapCenter(coordinates as LatLngTuple);
+    },
+    [manuscriptsWithCoordinates, handleMarkerClick, prepareOrigin]
   );
 
-  // sort manuscripts by their date
-  const sortedManuscripts = filteredManuscripts.sort(
-    (a: { date: string }, b: { date: string }) => {
-      const dateA = parseInt(a.date);
-      const dateB = parseInt(b.date);
-
-      return dateA - dateB;
-    }
+  // Get manuscripts with the same origin.
+  const getManuscriptsWithSameOrigin = useCallback(
+    (origin: string) => {
+      const preparedOrigin = prepareOrigin(origin);
+      return manuscriptsWithCoordinates.filter(
+        (manuscript) =>
+          manuscript.origin.includes(preparedOrigin) &&
+          manuscript.date >= yearLow &&
+          manuscript.date <= yearHigh
+      );
+    },
+    [manuscriptsWithCoordinates, prepareOrigin, yearLow, yearHigh]
   );
-
-  const manuscriptsWithCoordinates = sortedManuscripts.map(
-    (manuscript: { origin: string; city: string }) => {
-      let origin = manuscript.origin;
-
-      if (origin.includes("/")) {
-        origin = origin.split("/")[0].trim();
-      }
-      if (origin.includes("(")) {
-        origin = origin.split("(")[0].trim();
-      }
-
-      // If origin includes a question mark, use the part before it as the origin
-      if (origin.includes("?")) {
-        origin = origin.split("?")[0].trim();
-      }
-
-      // Look up the coordinates, and if not found, set a default value
-      const coordinates = originCoordinates[origin] || [0, 0];
-
-      return { ...manuscript, coordinates };
-    }
-  );
-
-  const getManuscriptWithOrigin = (origin: string, coordinates: number[]) => {
-    origin = origin.split("?")[0].trim();
-    handleMarkerClick(
-      manuscriptsWithCoordinates.filter((manuscript: { origin: string }) =>
-        manuscript.origin.includes(origin)
-      )
-    );
-    // update the map center to the clicked manuscript
-    setMapCenter(coordinates as LatLngTuple);
-  };
-
-  const getManuscriptsWithSameOrigin = (origin: string) => {
-    origin = origin.split("/")[0].trim();
-    origin = origin.split("(")[0].trim();
-    origin = origin.split("?")[0].trim();
-
-    return manuscriptsWithCoordinates.filter(
-      (manuscript: { date: number; origin: string }) =>
-        manuscript.origin.includes(origin) &&
-        manuscript.date >= yearLow &&
-        manuscript.date <= yearHigh
-    );
-  };
 
   return (
     <div className="mapContainer">
       <MapContainer
         center={[50, 4]}
         zoom={5}
-        style={{ width: "100%", height: "100vh" }}
+        style={{ width: "100%", height: "77vh", borderRadius: "10px" }}
       >
         <ChangeView center={mapCenter} />
         <TileLayer
@@ -129,44 +95,16 @@ const ManuscriptMap: React.FC<ManuscriptMapProps> = ({
           zoomOffset={-1}
         />
         {manuscriptsWithCoordinates.map(
-          (manuscript: {
-            title: string;
-            origin: string;
-            date: number;
-            identifier: String;
-            coordinates: [number, number];
-          }) =>
+          (manuscript) =>
             yearLow <= manuscript.date &&
             yearHigh >= manuscript.date && (
-              <Marker
-                position={manuscript.coordinates as LatLngTuple}
-                icon={ICON}
-                eventHandlers={{
-                  click: () =>
-                    getManuscriptWithOrigin(
-                      manuscript.origin,
-                      manuscript.coordinates
-                    ),
-                }}
-                key={`${manuscript.title}-${manuscript.identifier}`}
-              >
-                <Popup>
-                  <div>
-                    <strong>manuscripts:</strong>
-                    <div className="flex gap-1">
-                      {getManuscriptsWithSameOrigin(manuscript.origin).map(
-                        (sameOriginManuscript: any) => (
-                          <div key={sameOriginManuscript.identifier}>
-                            {sameOriginManuscript.alternative},
-                          </div>
-                        )
-                      )}
-                    </div>
-                    <strong>Origin:</strong>{" "}
-                    {manuscript.origin.split("?")[0] || ""}
-                  </div>
-                </Popup>
-              </Marker>
+              <ManuscriptMarker
+                key={manuscript.title}
+                manuscript={manuscript}
+                handleMarkerClick={getManuscriptWithOrigin}
+                getManuscriptsWithSameOrigin={getManuscriptsWithSameOrigin}
+                prepareOrigin={prepareOrigin}
+              />
             )
         )}
       </MapContainer>
