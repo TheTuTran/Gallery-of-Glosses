@@ -11,6 +11,9 @@ export const metadata = {
   title: "Gallery of Glosses",
   description: "Explore Glosses and Manuscripts",
 };
+  title: "Gallery of Glosses",
+  description: "Explore Glosses and Manuscripts",
+};
 
 export const revalidate = 0;
 
@@ -49,6 +52,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     }
   }, []);
 
+  return (
+    <html lang="en">
+      <body>
+        <ToasterProvider />
+        <ModalProvider />
+        <Navbar>
+          <div className="main">{children}</div>
+          <Footer />
+        </Navbar>
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
   return (
     <html lang="en">
       <body>
