@@ -10,6 +10,7 @@ import { Manuscript } from "@/lib/Manuscript";
 import Box from "@/components/Box";
 import toast from "react-hot-toast";
 import { ManuscriptList, MapControls } from "./components";
+import LoadingBox from "@/components/LoadingBox";
 
 // Dynamic import of ManuscriptMap component to prevent SSR
 const DynamicManuscriptMap = dynamic(
@@ -68,7 +69,7 @@ const Map: React.FC = () => {
             Current Location of {mapSelected} Manuscripts
           </p>
           {isLoadingManuscripts ? (
-            <div>Loading the Map...</div>
+            <LoadingBox label="map" />
           ) : (
             <DynamicManuscriptMap
               yearLow={yearLow}
