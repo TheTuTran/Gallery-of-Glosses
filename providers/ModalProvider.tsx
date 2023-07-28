@@ -1,7 +1,7 @@
 "use client";
 
 import CompareModal from "@/app/compare/components/CompareModal";
-import ManuscriptMapModal from "@/app/map/components/ManuscriptMapModal";
+//import ManuscriptMapModal from "@/app/map/components/ManuscriptMapModal";
 import { useEffect, useState } from "react";
 
 /**
@@ -40,7 +40,6 @@ const ModalProvider: React.FC<ModalProviderProps> = ({}) => {
   return (
     <>
       <CompareModal />
-      <ManuscriptMapModal />
     </>
   );
 };

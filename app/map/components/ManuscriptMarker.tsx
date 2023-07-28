@@ -1,7 +1,6 @@
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple, icon } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 import { Manuscript } from "@/lib/Manuscript";
-import { markerIcon } from "@/data/constants";
 
 interface ManuscriptMarkerProps {
   manuscript: Manuscript & { coordinates: LatLngTuple };
@@ -16,6 +15,11 @@ export const ManuscriptMarker: React.FC<ManuscriptMarkerProps> = ({
   getManuscriptsWithSameOrigin,
   prepareOrigin,
 }) => {
+  const markerIcon = icon({
+    iconUrl: "/images/marker.png",
+    iconSize: [32, 32],
+  });
+
   return (
     <Marker
       position={manuscript.coordinates}

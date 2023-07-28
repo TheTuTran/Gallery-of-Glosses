@@ -1,5 +1,3 @@
-import { LatLngTuple, icon } from "leaflet";
-
 // (site)/page.tsx
 export const images: string[] = [
   "https://images.unsplash.com/photo-1643609873467-15cfffe782be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
@@ -119,22 +117,3 @@ export const abbreviations = [
     desc: "A canonical reference system common in theological studies, where the numbers before and after the colon respectively represent the chapter and verse of a book from the Bible, e.g., Matthew 5:16 refers to Chapter 5, Verse 16 of the Gospel of Matthew.",
   },
 ];
-
-// map/components/ManuscriptMap.tsx
-export const originCoordinates: Record<string, LatLngTuple> = {
-  "Saint-Amand": [50.4472, 3.4312],
-  Laon: [49.5641, 3.6199],
-  "Buildwas Abbey": [52.6311, -2.4943],
-  Chartres: [48.4468, 1.4983],
-  Paris: [48.8566, 2.3522],
-  Hereford: [52.0567, -2.7156],
-  Clairvaux: [48.1785, 4.7441],
-  York: [53.9583, -1.0803],
-  "Bury St Edmunds": [52.2429, 0.7143],
-  "Saint Gall": [47.4223, 9.3748],
-};
-
-export const markerIcon = icon({
-  iconUrl: "/images/marker.png",
-  iconSize: [32, 32],
-});
