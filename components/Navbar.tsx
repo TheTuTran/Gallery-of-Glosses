@@ -5,7 +5,7 @@ import { useEffect, useMemo } from "react";
 import NavbarItem from "./NavbarItem";
 
 interface NavbarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 /**

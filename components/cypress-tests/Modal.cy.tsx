@@ -12,7 +12,6 @@ describe("<Modal />", () => {
         }}
         title={""}
         description={""}
-        children={undefined}
       />
     );
   });

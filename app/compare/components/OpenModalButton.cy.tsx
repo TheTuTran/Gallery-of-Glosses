@@ -1,9 +1,15 @@
-import React from 'react'
-import { OpenModalButton } from './OpenModalButton'
+import React from "react";
+import { OpenModalButton } from "./OpenModalButton";
 
-describe('<OpenModalButton />', () => {
-  it('renders', () => {
+describe("<OpenModalButton />", () => {
+  it("renders", () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<OpenModalButton />)
-  })
-})
+    cy.mount(
+      <OpenModalButton
+        handleOpen={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
+  });
+});

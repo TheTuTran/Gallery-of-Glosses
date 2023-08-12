@@ -6,7 +6,7 @@ interface ModalProps {
   onChange: (open: boolean) => void;
   title: string;
   description: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, children }) => {

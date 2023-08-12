@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
 interface DropInfoProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title: string;
 }
 
