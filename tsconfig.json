@@ -31,5 +31,5 @@
     ".next/types/**/*.ts",
     "app/manuscript/[id]"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["./cypress.config.ts", "node_modules", "cypress", "**/*.cy.tsx"]
 }
