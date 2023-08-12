@@ -29,6 +29,7 @@ import {
 import { toast } from "react-hot-toast";
 import { getTargetIdByValue } from "@/services";
 import { useRouter } from "next/navigation";
+import { IoOpenOutline } from "react-icons/io5";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -47,8 +48,6 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [hasRowSelectionChanged, setHasRowSelectionChanged] =
-    React.useState(false);
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const router = useRouter();
@@ -84,33 +83,25 @@ export function DataTable<TData, TValue>({
   }, [table, setSelectedRows, getFilteredSelectedRowModel]);
 
   const handleGlossClicked = (row: any) => {
-    if (hasRowSelectionChanged) {
-      setHasRowSelectionChanged(false);
-    } else {
-      toast.success("Opening Gloss in another tab... Please wait");
+    toast.success("Opening Gloss in another tab... Please wait");
 
-      getTargetIdByValue("title", row.original.title)
-        .then((targetId) => {
-          // Store manuscript data in session storage
-          sessionStorage.setItem("glossData", JSON.stringify(row.original));
+    getTargetIdByValue("title", row.original.title)
+      .then((targetId) => {
+        // Store manuscript data in session storage
+        sessionStorage.setItem("glossData", JSON.stringify(row.original));
 
-          // navigate to the new page with the target id as a parameter
-          router.push(`/gloss/${targetId}`);
-        })
-        .catch((error) => {
-          console.error("Error getting target id:", error);
-        });
-    }
+        // navigate to the new page with the target id as a parameter
+        router.push(`/gloss/${targetId}`);
+      })
+      .catch((error) => {
+        console.error("Error getting target id:", error);
+      });
   };
-
-  React.useEffect(() => {
-    setHasRowSelectionChanged(true);
-  }, [rowSelection]);
 
   return (
     <div className="space-y-4">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border border-neutral-500 bg-neutral-200 overflow-auto h-[57vh]">
+      <div className="rounded-md border border-neutral-500 bg-neutral-200h-[57vh]">
         <Table>
           <TableHeader className="rounded-md ">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -134,8 +125,6 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="cursor-pointer hover:bg-neutral-300/80"
-                  onClick={() => handleGlossClicked(row)}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -147,6 +136,17 @@ export function DataTable<TData, TValue>({
                       )}
                     </TableCell>
                   ))}
+                  <TableCell
+                    colSpan={row.getVisibleCells().length} // This will span across all columns
+                    className="text-center  py-2"
+                    onClick={() => handleGlossClicked(row)}
+                  >
+                    <div className="flex flex-col justify-center cursor-pointer hover:scale-105 items-center transition-delay rounded-md">
+                      <span className="truncate flex items-center gap-2">
+                        More Details <IoOpenOutline size={25} />
+                      </span>
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (

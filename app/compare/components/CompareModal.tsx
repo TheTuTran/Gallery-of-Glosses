@@ -56,7 +56,7 @@ const CompareModal = () => {
     >
       <div className="flex flex-col">
         <div className="overflow-y-auto max-h-[600px]">
-          <table className="basic m-2 max-w-[1650px]">
+          <table className="basic-table m-2 max-w-[1650px]">
             <thead>
               <tr>
                 <th>Title</th>

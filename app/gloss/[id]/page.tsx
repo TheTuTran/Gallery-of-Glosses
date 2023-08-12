@@ -73,6 +73,11 @@ export default function GlossPage() {
         }
       });
 
+      // Ensure that newRelatedGlosses contains at most 4 items
+      if (newRelatedGlosses.length > 4) {
+        newRelatedGlosses = newRelatedGlosses.slice(0, 4);
+      }
+
       // Update related glosses and set loading to false
       setRelatedGlosses(newRelatedGlosses);
       setLoadingRelated(false);
@@ -148,7 +153,7 @@ export default function GlossPage() {
       </Box>
 
       <Box className="w-[30%] p-8 overflow-auto">
-        <h2 className="text-2xl mb-2 text-blue-700">Gloss Images:</h2>
+        <h2 className="text-2xl mb-2 ">Gloss Images:</h2>
         <Image
           className="shadow-lg rounded-md"
           src={placeholderImage}

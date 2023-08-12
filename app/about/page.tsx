@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import {
   AboutContent,
+  AcknowledgementsContent,
   HistoryContent,
-  TermsContent,
   Sections,
+  TermsContent,
 } from "./components";
+import { aboutSections } from "@/data/constants";
 
 // The About page component
 export default function About() {
@@ -22,19 +24,14 @@ export default function About() {
     setMenu(false);
   };
 
-  // Effect hook to disable scrolling on the home page
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
   return (
     <>
       {/* Menu component that changes visibility based on state */}
       <div className={`menu ${menu ? "menu-open" : "menu-close"}`}>
-        <Sections handleChangeContent={handleChangeContent} />
+        <Sections
+          handleChangeContent={handleChangeContent}
+          sectionContent={aboutSections}
+        />
       </div>
 
       {/* Toggle button for menu */}
@@ -56,8 +53,10 @@ export default function About() {
             <AboutContent />
           ) : content === "History" ? (
             <HistoryContent />
-          ) : (
+          ) : content === "Terms" ? (
             <TermsContent />
+          ) : (
+            <AcknowledgementsContent />
           )}
         </div>
       </div>

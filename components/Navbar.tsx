@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
       },
       {
         label: "About",
-        active: pathname.includes("/about"),
+        active: pathname === "/about",
         href: "/about",
       },
       {

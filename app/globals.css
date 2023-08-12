@@ -9,9 +9,10 @@
   --main-bg-color: black;
   --secondary-color: rgba(113, 214, 141, 0.8);
   --accent-color: rgba(113, 214, 141, 0.15);
-  --border-color: rgb(182, 142, 113);
+  --border-color: rgb(55, 55, 55);
+  --menu-button-opened-color: rgba(255, 255, 255, 0.7);
+  --menu-button-closed-color: rgb(182, 142, 113);
   --scrollbar-display: none;
-  --menu-button-color: rgba(255, 255, 255, 0.7);
   --card-background-color: rgba(255, 255, 255, 0.1);
   --dropinfo-background-color: #d4e5e8;
   --gloss-background-color: #f3f3f3;
@@ -278,10 +279,10 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
 }
 .button-open {
-  background-color: var(--menu-button-color);
+  background-color: var(--menu-button-opened-color);
 }
 .button-close {
-  background-color: var(--border-color);
+  background-color: var(--menu-button-closed-color);
 }
 
 /* menu */
@@ -289,7 +290,7 @@ body {
 .menu {
   height: 40vh;
   width: 100%;
-  position: absolute;
+  position: fixed;
   left: 0px;
   bottom: 0px;
   opacity: 0;
@@ -413,8 +414,8 @@ body {
 
 .loading-box {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 2rem;
+  right: 2rem;
   background: #f3f3f3;
   border-radius: 8px;
   padding: 20px;

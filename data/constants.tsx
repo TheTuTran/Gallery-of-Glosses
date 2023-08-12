@@ -7,8 +7,8 @@ export const images: string[] = [
   "https://images.unsplash.com/photo-1603027862808-3661a3fb6923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=692&q=80",
 ];
 
-// about/components/Sections.tsx
-export const menuSections = [
+// about/page.tsx
+export const aboutSections = [
   {
     title: "About Us",
     src: "https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFib3V0JTIwdXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
@@ -20,6 +20,11 @@ export const menuSections = [
     content: "History",
   },
   {
+    title: "Acknowledgements",
+    src: "https://images.unsplash.com/photo-1556564195-1405a4585db3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHN0YWlyc3xlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    content: "Acknowledgements",
+  },
+  {
     title: "Terminology and Abbreviations",
     src: "https://images.unsplash.com/photo-1563906267088-b029e7101114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     content: "Terms",
@@ -27,7 +32,7 @@ export const menuSections = [
 ];
 
 // about/components/AboutContent.tsx
-export const aboutSections = [
+export const aboutTrackContent = [
   {
     title: "Who We Are",
     content:
@@ -115,5 +120,29 @@ export const abbreviations = [
   {
     title: "[##:##]",
     desc: "A canonical reference system common in theological studies, where the numbers before and after the colon respectively represent the chapter and verse of a book from the Bible, e.g., Matthew 5:16 refers to Chapter 5, Verse 16 of the Gospel of Matthew.",
+  },
+];
+
+// about/page.tsx
+export const glossesSections = [
+  {
+    title: "Browse all glosses",
+    src: "",
+    content: "All",
+  },
+  {
+    title: "Browse by Book",
+    src: "",
+    content: "Book",
+  },
+  {
+    title: "Browse By Theme",
+    src: "",
+    content: "Theme",
+  },
+  {
+    title: "Browse By Tag",
+    src: "",
+    content: "Tag",
   },
 ];

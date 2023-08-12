@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import ContentCard from "./ContentCard";
 import CustomScrollbar from "./CustomScrollbar";
-import { aboutSections } from "@/data/constants";
+import { aboutTrackContent } from "@/data/constants";
 
 // The AboutContent component displays information about the Gallery of Glosses
 // in a horizontally scrolling track, controlled by the mouse wheel.
@@ -55,7 +55,7 @@ export const AboutContent = () => {
           className="card-track"
         >
           {/* Each section from aboutSections is displayed in a ContentCard */}
-          {aboutSections.map((section, index) => (
+          {aboutTrackContent.map((section, index) => (
             <ContentCard
               key={index}
               title={section.title}

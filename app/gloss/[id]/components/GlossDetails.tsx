@@ -11,7 +11,7 @@ export const GlossDetails: React.FC<GlossDetailsProps> = ({ gloss }) => {
     <table className="basic-table w-full">
       <tbody>
         <tr>
-          <td className="px-4 py-2">Title:</td>
+          <td className="px-4 py-2">Incipit:</td>
           <td className="px-4 py-2">{gloss?.title}</td>
         </tr>
 
@@ -23,13 +23,14 @@ export const GlossDetails: React.FC<GlossDetailsProps> = ({ gloss }) => {
           <td className="px-4 py-2">Target Verse:</td>
           <td className="px-4 py-2">{gloss?.targetVerse}</td>
         </tr>
+
+        <tr>
+          <td className="px-4 py-2">Target Text:</td>
+          <td className="px-4 py-2">{gloss?.targetedText}</td>
+        </tr>
         <tr>
           <td className="px-4 py-2">Transcribed Gloss:</td>
           <td className="px-4 py-2">{gloss?.transcribedGloss}</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-2">Targeted Text:</td>
-          <td className="px-4 py-2">{gloss?.targetedText}</td>
         </tr>
         <tr>
           <td className="px-4 py-2">Notes:</td>
