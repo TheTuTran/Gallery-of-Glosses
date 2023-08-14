@@ -12,7 +12,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   children,
 }) => {
   // CSS class names for the title and content
-  const headerStyling = "text-3xl relative";
+  const headerStyling = "text-3xl relative truncate";
   const contentStyling = "text-xl";
 
   return (

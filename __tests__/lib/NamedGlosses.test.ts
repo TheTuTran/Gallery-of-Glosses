@@ -1,5 +1,4 @@
 import { NamedGlosses } from "@/../../lib/NamedGlosses"; // adjust the path as necessary
-import "jest";
 
 /**
  * Describe function is used to group related tests in a test suite.

@@ -10,7 +10,7 @@
   --secondary-color: rgba(113, 214, 141, 0.8);
   --accent-color: rgba(113, 214, 141, 0.15);
   --border-color: rgb(55, 55, 55);
-  --menu-button-opened-color: rgba(255, 255, 255, 0.7);
+  --menu-button-opened-color: rgb(212, 229, 232);
   --menu-button-closed-color: rgb(182, 142, 113);
   --scrollbar-display: none;
   --card-background-color: rgba(255, 255, 255, 0.1);
@@ -212,7 +212,7 @@ body {
   background-color: #b68e71;
   position: absolute;
   height: 20px;
-  width: 200px;
+  width: 300px;
   opacity: 0.5;
   transform: translateY(100%);
 }
@@ -259,25 +259,59 @@ body {
     transform: translateY(-40vh);
   }
 }
-/* menu toggle animation */
-#menu-toggle {
+/* menu button */
+.menu-toggle-container {
+  height: 7rem;
+  width: 7rem;
+  position: fixed;
+  left: 0rem;
+  bottom: 0rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-toggle-button {
   height: 3.5rem;
   width: 3.5rem;
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
-  z-index: 3;
-  left: 1.5rem;
-  bottom: 1.5rem;
-  box-shadow: 0rem 0rem 4rem rgba(0 0 0 / 50%);
   cursor: pointer;
 }
-#menu-toggle:hover {
+.menu-toggle-button:hover {
   transform: scale(1.1);
 }
-#menu-toggle:active {
+.menu-toggle-button:active {
   transform: scale(0.96);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--menu-button-closed-color);
 }
+
+.menu-toggle-text {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+  z-index: -3;
+}
+.menu-toggle-text span {
+  z-index: -3;
+  transform: translateY(2rem);
+}
+.menu-toggle-button:hover + .menu-toggle-text span {
+  animation: move-toggle-text-up 0.5s ease forwards;
+  animation-delay: calc(var(--n) * 0.1s);
+}
+@keyframes move-toggle-text-up {
+  from {
+    transform: translateY(2rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .button-open {
   background-color: var(--menu-button-opened-color);
 }
@@ -371,6 +405,19 @@ body {
   outline: none;
   opacity: 0.7;
   transition: opacity 0.2s;
+}
+.arr-1 {
+  animation: arrow-animation 2s linear infinite;
+}
+.arr-2 {
+  animation: arrow-animation 2s linear infinite;
+  animation-delay: 4s;
+}
+@keyframes arrow-animation {
+  to {
+    opacity: 0;
+    transform: translateX(0.5rem);
+  }
 }
 
 /* gloss page */

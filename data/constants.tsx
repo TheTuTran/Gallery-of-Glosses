@@ -34,39 +34,44 @@ export const aboutSections = [
 // about/components/AboutContent.tsx
 export const aboutTrackContent = [
   {
-    title: "Who We Are",
+    title: "Understanding Glosses",
     content:
-      "The Gallery of Glosses is an open-access digital platform devoted to revealing the richness of the medieval era through a meticulous study and interpretation of glosses from 12th-century manuscripts.",
+      "Glosses are annotations made by medieval thinkers as they engaged with a text, serving as crucial witnesses to early and advanced study, usage, and interpretation of seminal texts from western medieval society, like the Bible, works of Aristotle, or Roman legal compilations.",
   },
   {
-    title: "Our Mission",
+    title: "The Overlooked Significance",
     content:
-      "Our mission is to bridge the gap between past and present, connecting today's scholars, students, and enthusiasts with the scholars of the medieval era whose voices have been 'lost to the margins for centuries'.",
+      "Despite the essential role of glosses, scholarship has largely emphasized the Ordinary Gloss, the final standardized versions. This bias has unfortunately overshadowed the diverse voices of many medieval thinkers whose annotations haven't made it into the Ordinary Gloss.",
   },
   {
-    title: "Our Collection",
+    title: "Our Solution: A Digital Platform",
     content:
-      "We curate a broad collection of annotated manuscripts, primarily from the Gospel of Matthew, enabling a deeper understanding of the thought processes, ideas, and creative doodles of medieval minds.",
+      "To rectify this historical oversight, this project endeavors to create a digital platform to gather, organize, and share thousands of glosses from numerous manuscripts. This platform fosters collaboration, allowing scholars worldwide to add and interlink gloss data for a comprehensive understanding.",
   },
   {
-    title: "For Educators and Students",
+    title: "Towards a Global Community",
     content:
-      "We provide an immersive experience that allows students to engage directly with historical texts, fostering the development of translation and transcription skills, and offer educators a wealth of source material for their courses.",
+      "We aim to form a vibrant community of medievalists. This platform will facilitate the input of metadata about manuscripts and glosses, thereby weaving a comprehensive web of data. It will serve as a nexus for understanding not only the content of glosses but also the communication networks they hint at in pre-modern Europe.",
   },
   {
-    title: "Our Legacy",
+    title: "Technical Advancements",
     content:
-      "With the Gallery of Glosses, we hope to have created a project with longevity, shedding light on medieval scholarship in a way that resonates through the centuries and influences future interpretations.",
+      "Leveraging tools like the TPEN application and the Rerum API, the project introduces cutting-edge methods to encode and annotate transcriptions. Through Linked Data and Web Annotation standards, we aim for superior usability, discoverability, and data interlinking.",
   },
   {
-    title: "What is a Gloss?",
+    title: "Challenges of Representation",
     content:
-      "A gloss is a note or explanation inserted in the margins or between lines of a text to explain, translate, or expand on difficult or complex passages. They serve as a valuable insight into the scholarly and interpretative practices of the past, providing context and interpretations for text that can aid in our understanding of medieval theology, philosophy, and law.",
+      "Identifying, distinguishing, and connecting glosses present unique challenges. This platform ensures meaningful organization of vast data, helping scholars understand individual glosses and their shared themes. Advanced tools also trace gloss influences and the routes of their transmission.",
   },
   {
-    title: "Why Study Glosses?",
+    title: "Supporting Broader Humanities",
     content:
-      "Glosses provide a unique perspective on the ways medieval scholars understood and interpreted canonical texts. By studying these annotations, we gain insights into the intellectual landscape of the medieval period, and how scholars grappled with the complexities of the texts they studied.",
+      "By melding traditional manuscript study with digital tools, we significantly bolster medievalists' capabilities to research glosses. We aim to unveil voices that have been sidelined over centuries, shining a spotlight on their invaluable insights and interpretations.",
+  },
+  {
+    title: "The Broader Impact",
+    content:
+      "The implications of this research in medieval studies are monumental. Glosses offer a lens into medieval society's core disciplines, from theology to law. Our digital platform's tools unlock a dimension previously unattainable, allowing cross-disciplinary and interdisciplinary study that promises to reshape our understanding of the medieval intellectual landscape.",
   },
 ];
 

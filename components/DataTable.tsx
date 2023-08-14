@@ -102,7 +102,7 @@ export function DataTable<TData, TValue>({
     <div className="space-y-4">
       <DataTableToolbar table={table} />
       <div className="rounded-md border border-neutral-500 bg-neutral-200h-[57vh]">
-        <Table>
+        <Table className="min-h-[70vh]">
           <TableHeader className="rounded-md ">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -155,7 +155,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Loading Glosses...
                 </TableCell>
               </TableRow>
             )}

@@ -1,14 +1,14 @@
 export const AcknowledgementsContent = () => {
   return (
-    <div className="min-h-screen  py-6 flex flex-col justify-center sm:py-12">
-      <div className="relative py-3 sm:max-w-2xl sm:mx-auto">
-        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+    <div className="min-h-screen  py-6 flex flex-col justify-center">
+      <h1 className="text-4xl text-white ml-2 mb-10">Acknowledgements</h1>
+      <div className="relative py-3 flex justify-center w-full">
+        <div
+          className="relative px-4 py-10  min-w-[40%] shadow-lg rounded-md"
+          style={{ background: "rgb(212, 229, 232)" }}
+        >
           <div className="max-w-md mx-auto">
-            <h1 className="text-2xl font-semibold mb-6 text-center">
-              Acknowledgements
-            </h1>
-
-            <h2 className="text-xl font-semibold mb-2">
+            <h2 className="text-2xl font-semibold mb-2">
               At Saint Louis University:
             </h2>
             <h3 className="text-lg font-semibold mb-2">

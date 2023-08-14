@@ -45,12 +45,41 @@ export default function Glosses() {
       </div>
 
       {/* Toggle button for menu */}
-      <button
-        id="menu-toggle"
-        className={`relative ${menu ? "button-open" : "button-close"}`}
-        type="button"
-        onClick={() => setMenu(!menu)}
-      />
+      <div className="menu-toggle-container">
+        <button
+          className={`menu-toggle-button ${
+            menu ? "button-open" : "button-close"
+          }`}
+          type="button"
+          onClick={() => setMenu(!menu)}
+        ></button>
+        <div
+          className="menu-toggle-text"
+          style={
+            menu
+              ? { color: "rgb(212, 229, 232)" }
+              : { color: "rgb(91, 71, 56)" }
+          }
+        >
+          {menu ? (
+            <>
+              <span style={{ "--n": ".1" } as React.CSSProperties}>C</span>
+              <span style={{ "--n": ".2" } as React.CSSProperties}>l</span>
+              <span style={{ "--n": ".3" } as React.CSSProperties}>o</span>
+              <span style={{ "--n": ".4" } as React.CSSProperties}>s</span>
+              <span style={{ "--n": ".5" } as React.CSSProperties}>e</span>
+            </>
+          ) : (
+            <>
+              <span style={{ "--n": ".1" } as React.CSSProperties}>O</span>
+              <span style={{ "--n": ".2" } as React.CSSProperties}>p</span>
+              <span style={{ "--n": ".3" } as React.CSSProperties}>e</span>
+              <span style={{ "--n": ".4" } as React.CSSProperties}>n</span>
+              <span style={{ "--n": ".5" } as React.CSSProperties}></span>
+            </>
+          )}
+        </div>
+      </div>
 
       <div onClick={() => setMenu(false)}>
         <div className={`${menu ? "move-page-up" : ""}`}>

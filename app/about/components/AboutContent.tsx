@@ -21,7 +21,7 @@ export const AboutContent = () => {
       // Calculate the new scroll position
       let newScroll = scroll - e.deltaY / 15;
       // Restrict the scroll position to between -48 and 0
-      if (newScroll < -48) newScroll = -48;
+      if (newScroll < -55) newScroll = -55;
       if (newScroll > 0) newScroll = 0;
       setScroll(newScroll);
     };
@@ -67,7 +67,7 @@ export const AboutContent = () => {
         </div>
       </div>
       {/* CustomScrollbar component displays the current scroll position */}
-      <CustomScrollbar scroll={scroll} total={-48} />
+      <CustomScrollbar scroll={scroll} total={-55} />
     </div>
   );
 };
