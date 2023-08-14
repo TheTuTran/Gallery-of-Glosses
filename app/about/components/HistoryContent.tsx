@@ -38,13 +38,13 @@ export const HistoryContent = () => {
                 Matthews and work on transcribing glosses.
               </li>
               <li>
-                Outcome: Larson and Cuba decided to expand the project's scope,
-                envisioning a digital humanities infrastructure for multiple
-                medieval authoritative texts.
+                Outcome: Larson and Cuba decided to expand the project&apo;s
+                scope, envisioning a digital humanities infrastructure for
+                multiple medieval authoritative texts.
               </li>
             </ul>
             <h2 className="text-xl font-semibold mb-2">
-              President’s Research Fund Award (2020)
+              President&apos;s Research Fund Award (2020)
             </h2>
             <ul className="list-disc list-inside mb-4 pl-4">
               <li>Grant Amount: $21,000 (13-month grant)</li>
@@ -77,18 +77,18 @@ export const HistoryContent = () => {
               </li>
               <li>Organization of data on the Glossing Matthew GitHub site.</li>
               <li>
-                A paper by Patrick Cuba and Bryan Haberberger titled "Building a
-                IIIF-Aware Ecosystem" presented at the IIIF Annual Conference on
-                June 23, 2021.
+                A paper by Patrick Cuba and Bryan Haberberger titled
+                &quot;Building a IIIF-Aware Ecosystem&quot; presented at the
+                IIIF Annual Conference on June 23, 2021.
               </li>
               <li>
                 A draft research article by Atria A. Larson submitted to the
                 journal Quaderni di storia religiosa medievale.
               </li>
               <li>
-                A poster titled "Digital Humanities Tools for Capturing Glosses
-                on Authoritative Texts" accepted for the 16th International
-                Congress of Medieval Canon Law in July 2022.
+                A poster titled &quot;Digital Humanities Tools for Capturing
+                Glosses on Authoritative Texts&quot; accepted for the 16th
+                International Congress of Medieval Canon Law in July 2022.
               </li>
             </ul>
             <h2 className="text-xl font-semibold mb-2">Future Directions</h2>
