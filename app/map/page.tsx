@@ -14,7 +14,7 @@ import LoadingBox from "@/components/LoadingBox";
 
 // Dynamic import of ManuscriptMap component to prevent SSR
 const DynamicManuscriptMap = dynamic(
-  () => import("./components/ManuscriptMap"),
+  () => import("./components/ui/ManuscriptMap"),
   {
     ssr: false,
   }

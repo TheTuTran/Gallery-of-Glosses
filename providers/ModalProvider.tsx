@@ -1,8 +1,7 @@
 "use client";
 
-import CompareModal from "@/app/compare/components/CompareModal";
-import ManuscriptMapModal from "@/app/map/components/ManuscriptMapModal";
-//import ManuscriptMapModal from "@/app/map/components/ManuscriptMapModal";
+import CompareModal from "@/app/compare/components/ui/CompareModal";
+import ManuscriptMapModal from "@/app/map/components/ui/ManuscriptMapModal";
 import { useEffect, useState } from "react";
 
 /**

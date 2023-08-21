@@ -1,5 +1,5 @@
 // (site)/page.tsx
-export const images: string[] = [
+export const homeImages: string[] = [
   "https://images.unsplash.com/photo-1643609873467-15cfffe782be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
   "https://images.unsplash.com/photo-1602660187275-7275b639d7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1546&q=80",
   "https://images.unsplash.com/photo-1472173148041-00294f0814a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
@@ -8,7 +8,7 @@ export const images: string[] = [
 ];
 
 // about/page.tsx
-export const aboutSections = [
+export const aboutMenuList = [
   {
     title: "About Us",
     src: "https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFib3V0JTIwdXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
@@ -129,25 +129,25 @@ export const abbreviations = [
 ];
 
 // about/page.tsx
-export const glossesSections = [
+export const glossesMenuList = [
   {
     title: "Browse all glosses",
-    src: "",
+    src: "https://images.unsplash.com/photo-1602660187275-7275b639d7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1546&q=80",
     content: "All",
   },
   {
     title: "Browse by Book",
-    src: "",
+    src: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     content: "Book",
   },
   {
     title: "Browse By Theme",
-    src: "",
+    src: "https://images.unsplash.com/photo-1529589585661-8fb5cdc75c48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1116&q=80",
     content: "Theme",
   },
   {
     title: "Browse By Tag",
-    src: "",
+    src: "https://images.unsplash.com/photo-1660298243493-b07cf4077774?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2093&q=80",
     content: "Tag",
   },
 ];

@@ -90,8 +90,13 @@ export function DataTable<TData, TValue>({
         // Store manuscript data in session storage
         sessionStorage.setItem("glossData", JSON.stringify(row.original));
 
-        // navigate to the new page with the target id as a parameter
-        router.push(`/gloss/${targetId}`);
+        // Open in a new tab using the traditional way
+        const newTab = window.open(`/gloss/${targetId}`, "_blank");
+
+        // Optional: If for some reason the new tab didn't open, focus on it
+        if (newTab) {
+          newTab.focus();
+        }
       })
       .catch((error) => {
         console.error("Error getting target id:", error);

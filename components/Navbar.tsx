@@ -79,25 +79,25 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const rightItems = routes.slice(3);
 
   return (
-    <div className="flex flex-col h-full w-full">
-      <div
+    <main className="flex flex-col h-full w-full">
+      <nav
         className={`z-40 fixed hidden md:flex flex-col h-[60px] w-full p-2 transition duration-200 bg-black`}
       >
-        <div className="rounded-lg h-fit w-full flex justify-between px-8">
-          <div className="flex gap-8 text-center">
+        <section className="rounded-lg h-fit w-full flex justify-between px-8">
+          <section className="flex gap-8 text-center">
             {leftItems.map((item) => (
               <NavbarItem key={item.label} {...item} />
             ))}
-          </div>
-          <div className="flex gap-8 text-center">
+          </section>
+          <section className="flex gap-8 text-center">
             {rightItems.map((item) => (
               <NavbarItem key={item.label} {...item} />
             ))}
-          </div>
-        </div>
-      </div>
+          </section>
+        </section>
+      </nav>
       <main className="pt-[5vh] flex-1 bg-neutral-800">{children}</main>
-    </div>
+    </main>
   );
 };
 

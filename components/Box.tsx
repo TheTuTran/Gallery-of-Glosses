@@ -16,7 +16,7 @@ interface BoxProps {
  */
 
 const Box: React.FC<BoxProps> = ({ children, className }) => {
-  return <div className={twMerge("box", className)}>{children}</div>;
+  return <main className={twMerge("box", className)}>{children}</main>;
 };
 
 export default Box;

@@ -1,6 +1,6 @@
 import React from "react";
 import ToasterProvider from "@/providers/ToasterProvider";
-import "./globals.css";
+import "./styles/globals.css";
 import Navbar from "@/components/Navbar";
 import ModalProvider from "@/providers/ModalProvider";
 import Footer from "@/components/Footer";

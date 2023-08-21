@@ -1,2 +1,2 @@
-export { default as ManuscriptList } from "./ManuscriptList";
-export { default as MapControls } from "./MapControls";
+export { default as ManuscriptList } from "./ui/ManuscriptList";
+export { default as MapControls } from "./ui/MapControls";

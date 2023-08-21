@@ -30,13 +30,13 @@ export default function Compare() {
   };
 
   return (
-    <div className="flex gap-6 py-10">
+    <main className="flex gap-6 py-10">
       {/* The left box for the data table */}
 
       <Box className="w-[85%] rounded-md p-8 shadow-md">
-        <div>
-          <p className="font-semibold text-lg mb-4">Compare Named Glosses</p>
-        </div>
+        <section>
+          <h1 className="font-semibold text-lg mb-4">Compare Named Glosses</h1>
+        </section>
         <DataTable
           setSelectedRows={setSelectedRows}
           columns={GlossColumns}
@@ -48,13 +48,13 @@ export default function Compare() {
 
       {/* The right box for the selection list and modal opening button */}
       <Box className="w-[20%] rounded-md p-8 ">
-        <div className="flex flex-col">
+        <section className="flex flex-col">
           {/* The list of selected glosses */}
           <SelectionList selectedRows={selectedRows} />
           {/* The button to open the compare modal */}
           <OpenModalButton handleOpen={handleOpen} />
-        </div>
+        </section>
       </Box>
-    </div>
+    </main>
   );
 }
